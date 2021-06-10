@@ -16,7 +16,7 @@ if (isset($_SESSION['rank'])) {
     $rank = "gast";
 }
 
-
+//pp
 if (isset($_GET['logout'])) {
     session_destroy();
     unset($_SESSION['gebruikersnaam']);
