@@ -33,7 +33,7 @@ setlocale(LC_TIME, array('nl_NL.UTF-8','nl_NL@euro','nl_NL','dutch'));
 
 
 $weetjes = array();
-$vandaag = date("Y-m-d");
+$vandaag = date("d-m-Y");
 
 $sqs = "SELECT * FROM weetjesDB WHERE geb_datum='$vandaag'";
 
@@ -87,7 +87,7 @@ $conn->close();
             
             <div class="grootBox">
                 
-                <p>Wij proberen van zoveel mogelijk kinderen en ouderen huld geld te ontnemen. Die verwende krengen verdienen niks. ALLES MOET NAAR ONS EN WIJ ZULLEN DE WERELD VEROVEREN!!</p>
+                <p>Welkom op de KnowItAll website. Meer informatie volgt</p>
             </div>
         </div>
 

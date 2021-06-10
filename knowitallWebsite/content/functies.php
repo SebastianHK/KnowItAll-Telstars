@@ -7,7 +7,7 @@ function stuur()
 {
     global $gebruiker, $conn;
     if (isset($_SESSION["geplaatst"])) {
-        echo "Sessie Geplaatst: ".$_SESSION["geplaatst"];
+        //echo "Sessie Geplaatst: ".$_SESSION["geplaatst"];
         $nieuwMin = $_SESSION["nieuwTijd"][0];
         $oudMin = $_SESSION["oudTijd"][0];
         $nieuwH = $_SESSION["nieuwTijd"][1];
@@ -15,9 +15,9 @@ function stuur()
         $nieuwD = $_SESSION["nieuwTijd"][2];
         $oudD = $_SESSION["oudTijd"][2];
 
-        echo '<p>' . $_SESSION["geplaatst"] . '</p>';
-        if ($_SESSION["geplaatst"] > 10 && abs($nieuwMin - $oudMin) > 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
-            echo "<div class='error'><p>Je hebt teveel bercihten geplaats in een krotte tijd!</p></div>";
+        //echo '<p>' . $_SESSION["geplaatst"] . '</p>';
+        if ($_SESSION["geplaatst"] > 10 && abs($nieuwMin - $oudMin) < 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
+            echo "<div class='error'><p>Je hebt te veel berichten geplaatst in een korte tijd!</p></div>";
             if (abs($nieuwMin - $oudMin) > 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
                 $_SESSION["geplaatst"] = 0;
             }
@@ -38,7 +38,7 @@ function stuur()
             $_SESSION["geplaatst"] = $_SESSION["geplaatst"] + 1;
             $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
         } else {
-            $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));;
+            $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
             $_SESSION["oudTijd"] = explode("-",date("i-h-d"));
             $_SESSION["geplaatst"] = 0;
 

@@ -22,7 +22,7 @@ if (!isset($_SESSION['gebruikersnaam'])) {
 if (isset($_GET['logout'])) {
     session_destroy();
     unset($_SESSION['gebruikersnaam']);
-    header("location: login.php");
+    header("location: ../index.php");
 }
 $localhost = "localhost"; #localhost
 $dbusername = "root"; #username of phpmyadmin
@@ -34,12 +34,7 @@ if ($conn -> connect_errno) {
     echo "Failed to connect to MySQL: " . $conn -> connect_error;
     exit();
 }
-/*
-echo "<p>Henk: ".password_hash("Henk",PASSWORD_DEFAULT)."</p>";
-echo "<p>GamerLifStyle: ".password_hash("GamerLifStyle",PASSWORD_DEFAULT)."</p>";
-echo "<p>123: ".password_hash("123",PASSWORD_DEFAULT)."</p>";
-echo "<p>piet: ".password_hash("piet",PASSWORD_DEFAULT)."</p>";
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -184,9 +179,9 @@ echo "<p>piet: ".password_hash("piet",PASSWORD_DEFAULT)."</p>";
         $sqs = "SELECT * FROM `weetjesDB` WHERE gebruiker='$gebruiker' LIMIT 15";
         $huidigPage = 0;
         if (isset($_POST["limit"])) {
-            echo '<h1>'.$_POST["limit"].'</h1>';
+            //echo '<h1>'.$_POST["limit"].'</h1>';
             $huidigPage = $_POST["limitPage"];
-            echo '<h1>'.$_POST["limitPage"].'</h1>';
+            //echo '<h1>'.$_POST["limitPage"].'</h1>';
             $offset = $huidigPage*15;
             if ($huidigPage < 0) {
                 $huidigPage = 1;
@@ -214,9 +209,10 @@ echo "<p>piet: ".password_hash("piet",PASSWORD_DEFAULT)."</p>";
 
                 echo '<div class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.date('d-m-Y',strtotime($row['geb_datum'])).'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
-                                <form class='invis' onsubmit='return kill()' method='POST' action=''><input type='hidden' name='ID' value='$ID'>
+                                <form class='invis' onsubmit='return kill()' method='POST' action=''>
+                                        <input type='hidden' name='ID' value='$ID'>
                                        <input type='hidden' name='gebruikersnaam' value='$gebruikersnaam'>
                                        <input class='verwijder' name='verwijder' value='' type='submit'>
                                  </form>
@@ -282,7 +278,7 @@ echo "<p>piet: ".password_hash("piet",PASSWORD_DEFAULT)."</p>";
                     echo '<script>errorr(true, "Er ging iets fout bij het verwijderen van weetje '.$ID.'.")</script>';
                 }
             } else {
-                echo '<script>errorr(true, "Stout, je mag weetje '.$ID.' niet verwijderen.")</script>';
+                echo '<script>errorr(true, "Je mag weetje '.$ID.' niet verwijderen.")</script>';
 
             }
 
