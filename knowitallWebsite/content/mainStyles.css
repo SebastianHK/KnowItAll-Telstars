@@ -1,0 +1,690 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* 
+====================== BELANGRIJK =========================
+Dit zijn de styles voor alle paginas, dingen hier veranderen veranderd elke pagina 
+============================================================*/
+
+* {
+    font-size: max(20px, 1.5vw);
+    
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+/* -----------------------------------------------------
+ACHTERGROND \/
+-------------------------------------------------------- */
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 2.1rem;
+    height: 1.25rem;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
+
+    /* The slider */
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    .slider.norm:before, .nintendo:after {
+    position: absolute;
+    content: "";
+    height: 1.1rem;
+    width: 1.1rem;
+    left: 0.07rem;
+    bottom: 0.065rem;
+    background-color: #006FCD;
+    /*background-image: url(https://www.vhv.rs/dpng/d/477-4777087_transparent-tales-of-zestiria-png-new-playstation-network.png);
+    */
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+    .nintendo:after {
+        background-color: #E70013 !important;
+    }
+
+    #ninKnop {
+    opacity: 0;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+    content: "";
+    left: 4px;
+    bottom: 4px;
+    background-color: #E70013;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    input:checked + .slider:before, input:checked + .nintendo:after {
+    /*background-image: url(https://e7.pngegg.com/pngimages/765/892/png-clipart-xbox-logo-xbox-one-playstation-4-xbox-360-xbox-logo-electronics-computer-wallpaper.png);
+    */
+    background-color: #09EB09;
+    }
+
+    input:focus + .slider:before, input:focus + .nintendo:after {
+    box-shadow: none;
+    }
+
+    input:checked + .slider:before, input:checked + .nintendo:after {
+    -webkit-transform: translateX(0.84rem);
+    -ms-transform: translateX(0.84rem);
+    transform: translateX(0.84rem);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+    border-radius: 34px;
+    }
+
+    .slider.round:before,.nintendo.round:after {
+    border-radius: 50%;
+    } 
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+    .achtergrond {
+        z-index: -1;
+        opacity: 1;
+        transition: .4s;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+
+    }
+    .xboxStyle {
+        opacity: 1;
+        background: linear-gradient(180deg, #00B929 0%, #4cec59 100%), #FFFFFF;
+    }
+    .psStyle {
+        opacity: 1;
+        background: linear-gradient(180deg, #006FCD 0%, #003058 100%), #FFFFFF;
+    }
+    .nStyle {
+        opacity: 1;
+        background-image: url(https://assets.nintendo.com/image/upload/f_auto,q_auto/ncom/en_US/merchandising/color?v=2021052718);
+    }
+    #styleSwitch {
+        position: relative;
+        margin-left: 20px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 140px;
+        height: 100%;
+    }
+
+    /* knoppern */
+    /* knoppern 1*/
+    .submitKnop {
+        color: white;
+        cursor: pointer;
+        border: none;
+        background: #1DB900;
+        box-shadow: none;
+        width: 6rem;
+        height: 1.8rem;
+        border-radius: 5px;
+        transition: 0.2s;
+    }
+    #submitKnop1 {
+        color: white;
+        cursor: pointer;
+        border: none;
+        background: #1DB900;
+        box-shadow: none;
+        width: 6rem;
+        height: 1.8rem;
+        border-radius: 5px;
+        transition: 0.2s;
+    }
+
+    .submitKnop:hover {
+        transform: translate(-3px,-3px);
+        box-shadow: 3px 3px;
+    }
+    .submitKnop:active {
+        transform: translate(0,0);
+        box-shadow: 0 0, 0 0;
+    }
+
+/* -----------------------------------------------------
+ACHTERGROND ^^^^
+-------------------------------------------------------- */
+
+/* --------------- HEADER StielS -------------- */
+
+header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: white;
+    width: 100%;
+    top: 0;
+    position: relative;
+    height: 80px;
+    
+}
+
+.titel {
+    font-weight: bold;
+    font-size: 1.8rem;
+
+}
+.navKnop:visited {
+    color: white;
+}
+.navKnop {
+    cursor: pointer;
+    color: white;
+    transition: 0.4s;
+}
+.navKnop:hover {
+    color: rgb(185, 185, 185);
+}
+.headerNavKnop {
+    margin-left: 1.5rem;
+}
+
+.navKnoppen {
+    
+}
+
+.logKnop {
+    position: absolute;
+    right: 40px;
+}
+.logKnoppen {
+    position: absolute;
+    right: 40px;
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* --------------- MAIN StielS -------------- */
+main {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 80px);
+    justify-content: center;
+    gap: 7rem;
+    flex-wrap: wrap;
+}
+
+#boxen {
+    display: flex;
+    justify-content: center;
+    gap: 7rem;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+}
+
+.grootBox {
+    overflow: auto;
+    padding: 20px;
+    color: #272727;
+    position: relative;
+    width: 19rem;
+    height: 13rem; 
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.74);
+    
+}
+#labels label {
+    position: relative;
+    color: #272727;
+    
+    
+}
+#labels label:nth-child(1) {
+    right: 200px;
+}
+.grootBox p {
+    line-height: 40px;
+}
+#labels {
+    margin-top: 3.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    flex-wrap: wrap;
+    position: absolute;
+}
+
+
+
+.registratieContainer {
+    border: 1px black solid;
+    margin-top: 2rem;
+    width: 60%;
+    height: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.616);
+}
+.textKnopAnimatie:after {
+    backface-visibility: hidden;
+    content: '';
+    transition: 0.2s;
+    overflow: hidden;
+    width: 0;
+    display: block;
+    margin-left: 80%;
+    position: relative;
+    border-bottom: rgba(0, 0, 0, 0.699) 2px solid;
+}
+.textKnopAnimatie:hover:after {
+    width: 19.5%;
+    
+    
+}
+.registratieContainer h1{
+    font-weight: 400;
+    font-size: 2rem;
+}
+.inputVeld {
+    display: flex;
+    flex-direction: column;
+    
+}
+.inputVeld input {
+    padding: 2px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    border: 1px solid black;
+    height: 40px;
+    width: 18rem;
+}
+
+#buttonDiv {
+    width: 90%;
+    height: 2.5rem;
+    position: relative;
+}
+
+#submitKnop1 {
+    position: absolute;
+    right: 0;
+}
+.nintendoKleur {
+    color: white;
+}
+.error {
+    width: 92%;
+    margin: 0px auto;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+.success {
+    color: #3c763d;
+    background: #dff0d8;
+    border: 1px solid #3c763d;
+    margin-bottom: 20px;
+}
+
+#weetjeStuurder {
+    top: 10px;
+    position: fixed;
+    right: 20px;
+    border: 1px black solid;
+    margin-top: 2rem;
+    width: 400px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.916);
+    z-index: 100;
+}
+
+#fileInputContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+#fileInputLabel {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(29, 185, 0);
+}
+
+#wegKnopWeetjeStuurder {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    top: 3px;
+}
+
+.titelText {
+    color: white;
+    font-size: 1.5rem;
+}
+
+#altMain {
+    margin-top: 3rem;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: unset;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    flex-wrap: unset;
+}
+
+#restContainer {
+    background-color: rgba(255, 255, 255, 0.816);
+    border-radius: 20px;
+    align-items: center;
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.weetjeDiv {
+    background-color: white;
+    width: 70%;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    height: 200px;
+}
+.weetjeInfo {
+    display: flex;
+
+    justify-content: space-between;
+}
+.weetje {
+
+}
+.verwijder {
+    text-align: center;
+    background-image: url("images/verwijder2.png");
+    background-position: center;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    padding: 0 4px 0 4px !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.verwijder:hover {
+    background-image: url("images/verwijder3.png");
+}
+.edit {
+    text-align: center;
+    background-image: url("images/edit2.png");
+    background-position: center;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    padding: 0 4px 0 4px;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.edit:hover {
+    transform: rotate(270deg);
+}
+
+#editKnoppen {
+
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* tooltip styles */
+
+.tooltip {
+    z-index: 1;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+
+    font-size: 0.6rem;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+pre {
+    background: white;
+    width: 100%;
+    height: 1000px;
+    overflow: scroll;
+}
+pre:before {
+    color: red;
+    font-weight: bolder;
+    content: "DEBUG SCHERM - ";
+}
+
+/* limitBat styels */
+
+.limitBar {
+    gap: 3px;
+    display: flex;
+    flex-direction: row;
+}
+
+.limitKnop {
+    opacity: 0.7;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.816);
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
+.huidig {
+    opacity: 1 !important;
+}
+
+#zoekCentrum {
+    font-size: 0.8rem;
+    justify-content: space-evenly;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    display: grid;
+    color: black;
+    height: 100%;
+    background-color: white;
+    width: 90%;
+    padding: 20px;
+    border-radius: 20px;
+    grid-auto-flow: row;
+    text-align: center;
+}
+
+#zoekCentrum input[type=text], #gebruikerDataList {
+    font-size: 0.8rem;
+    background-color: #F0F0F0;
+    border: 2px solid black;
+    color: black;
+    border-radius: 3px;
+    text-align: center;
+    width: 7rem;
+}
+#zoekCentrum select {
+    background-color: #F0F0F0;
+    border: 2px solid black;
+    color: black;
+    border-radius: 3px;
+    text-align: center;
+    width: 130px;
+
+}
+
+.zoekInput[type=date] {
+    background-color: #F0F0F0;
+    border: 2px solid black;
+    color: black;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+}
+
+.zoekInput option {
+    font-size: 0.8rem;
+}
+#zoekCentrum label {
+    grid-row: 1;
+    grid-column: auto;
+}
+.zoekInput {
+    width: 100% !important;
+    font-size: 0.8rem;
+    grid-column: auto;
+    grid-row: 2;
+}
+
+
+#zoekCentrum input[type=submit],#zoekCentrum input[type=reset]  {
+    font-size: 0.8rem;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    width: 4rem;
+    cursor: pointer;
+
+}
+
+#persInfo {
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+#editFormBackground {
+    top: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#editForm {
+
+    overflow: auto;
+    z-index: 10000;
+    background: white;
+    border-radius: 20px;
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+}
+.editFormTexts {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.editFormTexts label {
+    margin-top: 20px;
+}
+#editForm .submitKnop {
+    margin-bottom: 5%;
+}
+.editFormTexts input {
+
+    width: 50%;
+    border: black 2px solid;
+    padding: 1px;
+    border-radius: 5px;
+}
+.editFormTexts input[readonly] {
+
+    cursor: not-allowed;
+    color: #4e4e4e;
+}
+#editForm textarea {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    width: 90%;
+    height: 10%;
+}
