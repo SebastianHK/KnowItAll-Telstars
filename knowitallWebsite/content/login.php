@@ -24,10 +24,9 @@
                 <span id="slider" class="slider norm round nintendo"></span>
               </label>
     </div>
-    <a class="titel navKnop" href="#top">TheKnowItAll</a>
+    <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">feitjes</a>
-        <a href="index.html" class="navKnop headerNavKnop">profiel</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">feitjes</a>
     </div>
 
 

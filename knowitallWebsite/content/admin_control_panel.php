@@ -75,19 +75,119 @@ $gebruiker = $_SESSION['gebruikersnaam'];
 if(isset($_POST["submit"])) {
     stuur();
 }
+
+// maak de query om naar de server te sturen. dit is gedaan door de hele tijd stukken in een array te doen en die daarna naar een string te converten.
+$queryArr = ["SELECT * FROM `weetjesDB`"];
+
+
+// als er een nieuwe zoekrequest is gedaan doet hij dit. als je refreshed of naar een andere pagina gaat pakt hij de zoekresultaten van de vorige zoekrequest uit sessions
+if (isset($_POST['zoek'])) {
+    zoek();
+}
+/*
+if (isset($_POST['zoek'])) {
+    delZSession();
+    $filterArr = [];
+    $pSorteer = $_POST['sorteer'];
+    $pAscDesc = $_POST['ascDesc'];
+    $pFilter = $_POST['filter'];
+    $pGebDatum = $_POST['gebDatum'];
+    echo "<h1>DATUM GEBEURD: ".$pGebDatum."</h1>";
+    if ($_POST['gebruiker'] != null || $pFilter != "uit" || $pGebDatum != null) {
+        array_push($queryArr,"WHERE");
+        if ($_POST['gebruiker'] != null) {
+            $pGebruikersnaam = $_POST['gebruiker'];
+            $_SESSION['pGebruikersnaam'] = $pGebruikersnaam;
+            array_push($filterArr,"gebruiker='$pGebruikersnaam'");
+        }
+        if ($pFilter != "uit") {
+            array_push($filterArr,"status='$pFilter'");
+        }
+        if ($pGebDatum != null) {
+            array_push($filterArr,"geb_datum='$pGebDatum'");
+            $_SESSION['pGebDatum'] = $pGebDatum;
+        }
+        $i = 1;
+        echo '<h1>'.count($filterArr).'</h1>';
+        foreach ($filterArr as $filter) {
+
+            array_push($queryArr, "$filter");
+            if ($i < count($filterArr)) { array_push($queryArr,"AND"); echo "<h1> HEY".$i."</h1>";}
+            $i++;
+
+        }
+    }
+
+    $_SESSION['pSorteer'] = $pSorteer;
+    $_SESSION['pAscDesc'] = $pAscDesc;
+    $_SESSION['pFilter'] = $pFilter;
+
+    array_push($queryArr,"ORDER BY `$pSorteer` $pAscDesc");
+} else if (isset($_SESSION["pSorteer"])) {
+
+    $pSorteer = $_SESSION['pSorteer'];
+    $pAscDesc = $_SESSION['pAscDesc'];
+    $pFilter = $_SESSION['pFilter'];
+    $filterArr = [];
+    if (isset($pFilter) || isset($_SESSION['pgebDatum']) || isset($_POST['gebruiker'])) {
+        array_push($queryArr,"WHERE");
+        if (isset($_POST['gebruiker'])) {
+            $_SESSION['pGebruikersnaam'] = $pGebruikersnaam;
+            array_push($filterArr,"gebruiker='$pGebruikersnaam'");
+        }
+        if ($pFilter != "uit") {
+            array_push($filterArr,"status='$pFilter'");
+        }
+        if (isset($_SESSION['pgebDatum'])) {
+            $pGebDatum = $_SESSION['pGebDatum'];
+            array_push($filterArr,"geb_datum='$pGebDatum'");
+
+        }
+        $i = 1;
+        echo '<h1>'.count($filterArr).'</h1>';
+        foreach ($filterArr as $filter) {
+
+            array_push($queryArr, "$filter");
+            if ($i < count($filterArr)) { array_push($queryArr,"AND"); echo "<h1> HEY ".$i."</h1>";}
+            $i++;
+
+        }
+    }*/
+/*    if (isset($_SESSION['pGebruikersnaam']) || $pFilter != "uit") { array_push($queryArr,"WHERE"); }
+    if (isset($_SESSION['pGebruikersnaam'])) {
+        if ($_SESSION['pGebruikersnaam']!= null) {
+            $pGebruikersnaam = $_SESSION['pGebruikersnaam'];
+            array_push($queryArr,"gebruiker='$pGebruikersnaam'");
+        }
+    }
+    if (isset($_SESSION['pGebruikersnaam']) != null && $pFilter != "uit") { array_push($queryArr,"AND"); }
+
+    if ($pFilter != "uit") {
+        array_push($queryArr,"status='$pFilter'");
+    }
+    array_push($queryArr,"ORDER BY `$pSorteer` $pAscDesc");
+}*/
+
+array_push($queryArr,"LIMIT 15");
 $huidigPage = 0;
+
 if (isset($_GET["pagina"])) {
     $huidigPage = $_GET["pagina"];
+    $offset = $huidigPage*15;
     if ($huidigPage < 0) {
-        $huidigPage = 0;
+        $huidigPage = 1;
+    }
+
+    array_push($queryArr,"OFFSET $offset");
+}
+$RSQS = "SELECT COUNT(id) FROM weetjesdb";
+if ($queryArr[1] == "WHERE"){
+    $RSQS = $RSQS." WHERE ".$queryArr[2];
+    if ($queryArr[3] == "AND"){
+        $RSQS = $RSQS." AND ".$queryArr[4];
     }
 }
-$queryString = zoeken();
-
-$numRowsQuery = numRowsQuery();
-echo "<h1>".$numRowsQuery."</h1>";
-$RSQS = "SELECT COUNT(id) FROM weetjesdb";
-$numRows = $conn->query($numRowsQuery);
+$numRows = $conn->query($RSQS);
 $numRows = $numRows->fetch_assoc();
 $numRows = $numRows['COUNT(id)'];
 ?>
@@ -120,7 +220,7 @@ $numRows = $numRows['COUNT(id)'];
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
         <a href="index.php" class="navKnop headerNavKnop">profiel</a>
         <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
         <?php  if ($_SESSION['rank'] == 'admin') : ?>
@@ -244,17 +344,20 @@ $numRows = $numRows['COUNT(id)'];
         </div>
         <?php
 
-
-        $sqs = $queryString;
+        print_r($queryArr);
+        $sqs = implode(" ", $queryArr);
         //TODO gebruiker status toevoegen;
         if ($pGebruikersnaam != "") {
             echo "<div id='persInfo'>Weetjes van $pGebruikersnaam <form class='invis' onsubmit='return kill()' method='POST' action=''><input type='hidden' name='ID' value=''><input type='hidden' name='gebruikersnaam' value='$pGebruikersnaam'><input class='verwijder' name='ban' value='' type='submit'></form></div>";
         }
         echo "<p>Resultaten: $numRows</p>";
-
-        echo "<h1>".$sqs."</h1>";
+        echo "<h1>$sqs</h1>";
 
         $result = $conn->query($sqs);
+
+
+        echo "$RSQS";
+
 
         $weetjesArr = Array();
 

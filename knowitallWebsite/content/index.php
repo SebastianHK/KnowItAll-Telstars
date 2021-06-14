@@ -101,6 +101,7 @@ if ($conn -> connect_errno) {
 
         <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
+            <input type="text" required name="titelweetje" id="titelweetje" placeholder="titel" maxlength="50"></input><br>
             <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
             <p>datum van gebeurd</p>
             <input name="datum" type="date">
@@ -156,6 +157,9 @@ if ($conn -> connect_errno) {
         <p class="tooltip">ID
             <span class="tooltiptext">ID van het weetje</span>
         </p> -
+        <p class="tooltip">titel
+            <span class="tooltiptext">titel van het weetje</span>
+        </p> -
         <p class="tooltip">plaats datum
             <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
         </p> -
@@ -203,13 +207,14 @@ if ($conn -> connect_errno) {
             while($row = $result->fetch_assoc()) {
                 $ID = $row['id'];
                 $gebruikersnaam = $row['gebruiker'];
+                $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
 
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
 
                 echo '<div class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.date('d-m-Y',strtotime($row['geb_datum'])).'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.date('d-m-Y',strtotime($row['geb_datum'])).'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
                                 <form class='invis' onsubmit='return kill()' method='POST' action=''>
                                         <input type='hidden' name='ID' value='$ID'>

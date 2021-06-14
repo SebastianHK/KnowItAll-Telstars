@@ -15,7 +15,9 @@
     <div id="psAchtergrond" class="psStyle achtergrond" style="opacity: 0;"></div>
     
 <body>
+
 <?php
+
 
 $localhost = "localhost"; #localhost
 $dbusername = "root"; #username of phpmyadmin
@@ -65,10 +67,11 @@ $conn->close();
     </div>
     <a class="titel navKnop" href="#top">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="content/weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
         <a href="content/index.php" class="navKnop headerNavKnop">profiel</a>
     </div>
-    <a href="content/index.php" class="navKnop logKnop">login/regitreer</a>
+
+<a href="content/index.php" class="navKnop logKnop">login/registreer</a>
 
     </header>
 

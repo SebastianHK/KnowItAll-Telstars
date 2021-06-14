@@ -26,7 +26,7 @@
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">feitjes</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">feitjes</a>
 
     </div>
 

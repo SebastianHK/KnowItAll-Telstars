@@ -5,7 +5,6 @@
     styleSlider("true"); zorgt voor de XBOX style.
     styleSlider("false");  zorgt voor de PS style.
     */
-
     function styleSlider(extra) {
         let t = document.getElementById("switchText");
         let c = document.getElementById("sliderCheck");
@@ -118,4 +117,3 @@ function kill() {
         return false;
     }
 }
-

@@ -16,12 +16,18 @@ if (isset($_SESSION['rank'])) {
     $rank = "gast";
 }
 
-//pp
+if (isset($_SESSION['gebruikersnaam'])) {
+    $gebruikersnaam = $_SESSION['gebruikersnaam'];
+} else {
+    $gebruikersnaam = "gast";
+}
+
 if (isset($_GET['logout'])) {
     session_destroy();
     unset($_SESSION['gebruikersnaam']);
     header("location: login.php");
 }
+
 $localhost = "localhost"; #localhost
 $dbusername = "root"; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
@@ -64,13 +70,22 @@ if ($conn -> connect_errno) {
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
         <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
-        <a href="index.php" class="navKnop headerNavKnop">profiel</a>
-        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
-        <?php  if ($_SESSION['rank'] == 'admin') : ?>
+        <?php  if ($gebruikersnaam !== 'gast') : ?>
+            <a href="index.php" class="navKnop headerNavKnop">profiel</a>
+            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+        <?php endif ?>
+        <?php  if ($rank == 'admin') : ?>
             <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
         <?php endif ?>
     </div>
-    <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+
+    <?php
+    if (isset($gebruikersnaam !== 'gast')) {
+        echo '<a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>';
+    } else {
+        echo '<a href="login.php" class="navKnop logKnop">login/registreeer</a>';
+    }
+    ?>
 
 </header>
 
@@ -86,9 +101,7 @@ if ($conn -> connect_errno) {
         </div>
     <?php endif ?>
 
-    <?php if (isset($_SESSION['gebruikersnaam'])) : ?>
-
-    <p class="titelText">Welkom bij de weetjes catalogus, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
+    <p class="titelText">Welkom bij de weetjes catalogus, <strong class="titelText"><?php echo $gebruikersnaam; ?></strong></p>
 
     <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
@@ -139,6 +152,9 @@ if ($conn -> connect_errno) {
             <p class="tooltip">ID
                 <span class="tooltiptext">ID van het weetje</span>
             </p> -
+            <p class="tooltip">titel
+                <span class="tooltiptext">titel van het weetje</span>
+            </p> -
             <p class="tooltip">plaats datum
                 <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
             </p> -
@@ -148,14 +164,11 @@ if ($conn -> connect_errno) {
             <p class="tooltip">status
                 <span class="tooltiptext">Satus van het weetje</span>
             </p> -
-            <p class="tooltip">verwijder
-                <span class="tooltiptext">Verwijder een weetje aan</span>
-            </p>
         </div>
         <?php
         include 'functies.php';
 
-        $gebruiker = $_SESSION['gebruikersnaam'];
+        $gebruiker = $gebruikersnaam;
         if(isset($_POST["submit"])) {
             stuur();
         }
@@ -193,12 +206,6 @@ if ($conn -> connect_errno) {
                 echo '<div class="weetjeDiv">
                         <div class="weetjeInfo">
                         <p>'.$ID.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
-                            <div id='editKnoppen'>
-                                <form class='invis' onsubmit='return kill()' method='POST' action=''><input type='hidden' name='ID' value='$ID'>
-                                       <input type='hidden' name='gebruikersnaam' value='$gebruikersnaam'>
-                                       <input class='verwijder' name='verwijder' value='' type='submit'>
-                                 </form>
-                             </div>
                         </div>
                            <hr>
                            <p class='weetje'>". $row['weetjes']."</p>
@@ -266,7 +273,6 @@ if ($conn -> connect_errno) {
 
         }
         ?>
-        <?php endif ?>
 
     </div>
 </main>
