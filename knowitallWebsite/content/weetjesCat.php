@@ -78,12 +78,11 @@ if ($conn -> connect_errno) {
             <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
         <?php endif ?>
     </div>
-
     <?php
-    if (isset($gebruikersnaam !== 'gast')) {
-        echo '<a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>';
+    if(isset($gebruikersnaam) !== 'gast') {
+        echo `<a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>`;
     } else {
-        echo '<a href="login.php" class="navKnop logKnop">login/registreeer</a>';
+        echo `<a href="login.php" class="navKnop logKnop">login/registreer</a>`;
     }
     ?>
 
@@ -105,6 +104,7 @@ if ($conn -> connect_errno) {
 
     <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
+        <input type="text" required name="titelweetje" id="titelweetje" placeholder="titel" maxlength="50"></input><br>
         <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
         <p>datum van gebeurd</p>
         <input name="datum" type="date">
@@ -199,13 +199,14 @@ if ($conn -> connect_errno) {
             while($row = $result->fetch_assoc()) {
                 $ID = $row['id'];
                 $gebruikersnaam = $row['gebruiker'];
+                $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
 
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
 
                 echo '<div class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
                         </div>
                            <hr>
                            <p class='weetje'>". $row['weetjes']."</p>
