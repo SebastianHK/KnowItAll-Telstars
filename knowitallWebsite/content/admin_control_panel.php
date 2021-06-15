@@ -82,7 +82,7 @@ $queryArr = ["SELECT * FROM `weetjesDB`"];
 
 // als er een nieuwe zoekrequest is gedaan doet hij dit. als je refreshed of naar een andere pagina gaat pakt hij de zoekresultaten van de vorige zoekrequest uit sessions
 if (isset($_POST['zoek'])) {
-    zoek();
+    zoeken();
 }
 /*
 if (isset($_POST['zoek'])) {
@@ -202,7 +202,7 @@ $numRows = $numRows['COUNT(id)'];
     <title>KnowItAll</title>
     <link rel="stylesheet" href="mainStyles.css">
     <link rel="icon" href="" type="image/icon type">
-
+    <link rel="icon" href="images/alleen_doos_logo.png" type="image/icon type">
 </head>
 <div id="xboxAchtergrond" class="xboxStyle achtergrond" style="opacity: 0;"></div>
 <div id="nintendoAchtergrond" class="nStyle achtergrond" style="opacity: 0;"></div>
