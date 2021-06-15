@@ -71,20 +71,18 @@ if ($conn -> connect_errno) {
     <div class="navKnoppen">
         <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
+            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
             <a href="index.php" class="navKnop headerNavKnop">profiel</a>
             <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+        <?php endif ?>
+        <?php  if ($gebruikersnaam == 'gast') : ?>
+            <a href="index.php" class="navKnop logKnop">login/registreer</a>
         <?php endif ?>
         <?php  if ($rank == 'admin') : ?>
             <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
         <?php endif ?>
+
     </div>
-    <?php
-    if(isset($gebruikersnaam) !== 'gast') {
-        echo `<a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>`;
-    } else {
-        echo `<a href="login.php" class="navKnop logKnop">login/registreer</a>`;
-    }
-    ?>
 
 </header>
 
