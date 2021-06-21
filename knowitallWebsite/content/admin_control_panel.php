@@ -152,7 +152,7 @@ $numRows = $numRows['COUNT(id)'];
 
     <?php if (isset($_SESSION['gebruikersnaam']) && $rank === 'admin') : ?>
 
-    <p class="titelText">Welkom op het admin control pagina, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
+    <p class="titelText">Welkom op de Admin Control Panel, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
 
     <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
