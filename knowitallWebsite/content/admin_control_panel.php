@@ -156,6 +156,7 @@ $numRows = $numRows['COUNT(id)'];
 
     <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
+        <input type="text" required name="titelweetje" id="titelweetje" placeholder="titel" maxlength="50"></input><br>
         <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
         <p>datum van gebeurd</p>
         <input name="datum" type="date">
@@ -229,6 +230,9 @@ $numRows = $numRows['COUNT(id)'];
             <p class="tooltip">gebruiker
                 <span class="tooltiptext">Naam van gebruiker</span>
             </p> -
+            <p class="tooltip">titel
+                <span class="tooltiptext">Titel van het weetje</span>
+            </p> -
             <p class="tooltip">plaats datum
                 <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
             </p> -
@@ -264,13 +268,14 @@ $numRows = $numRows['COUNT(id)'];
 
                 $ID = $row['id'];
                 $gebruikersnaam = $row['gebruiker'];
+                $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
 
                 $weetjesArr['weetje.'.$ID] = $row['weetjes'];
 
                 echo '<div class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. $gebruikersnaam .'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'. $gebruikersnaam .'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
                                  <form class='invis editForm' method='POST' action=''>
                                        <input type='hidden' name='ID' value='$ID'>
