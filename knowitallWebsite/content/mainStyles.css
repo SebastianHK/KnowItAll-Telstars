@@ -182,7 +182,7 @@ ACHTERGROND \/
 ACHTERGROND ^^^^
 -------------------------------------------------------- */
 
-/* --------------- HEADER StielS -------------- */
+/* --------------- HEADER Styles -------------- */
 
 header {
     display: flex;
@@ -216,9 +216,9 @@ header {
     margin-left: 1.5rem;
 }
 
-/*.navKnoppen {
+/* .navKnoppen {
 
-}*/
+} */
 
 .logKnop {
     position: absolute;
@@ -231,7 +231,7 @@ header {
     gap: 1.5rem;
 }
 
-/* --------------- MAIN StielS -------------- */
+/* --------------- MAIN Styles -------------- */
 main {
     display: flex;
     width: 100%;
@@ -258,13 +258,10 @@ main {
     height: 13rem; 
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.74);
-    
 }
 #labels label {
     position: relative;
     color: #272727;
-    
-    
 }
 #labels label:nth-child(1) {
     right: 200px;
@@ -280,8 +277,6 @@ main {
     flex-wrap: wrap;
     position: absolute;
 }
-
-
 
 .registratieContainer {
     border: 1px black solid;
@@ -439,9 +434,9 @@ main {
 
     justify-content: space-between;
 }
-/*.weetje {
+/* .weetje {
 
-}*/
+} */
 .verwijder {
     text-align: center;
     background-image: url("images/verwijder2.png");
@@ -537,7 +532,7 @@ pre:before {
     content: "DEBUG SCHERM - ";
 }
 
-/* limitBat styels */
+/* limitBar styles */
 
 .limitBar {
     gap: 3px;
