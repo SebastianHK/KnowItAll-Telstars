@@ -334,7 +334,7 @@ $numRows = $numRows['COUNT(id)'];
 
 
 
-        echo '<pre>' . var_export($weetjesArr, true) . '</pre>';
+        //echo '<pre>' . var_export($weetjesArr, true) . '</pre>';
 
         //om rows te verwijderen
         if (isset($_POST["verwijder"])) {
