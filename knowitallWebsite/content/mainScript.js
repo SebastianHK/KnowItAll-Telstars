@@ -17,8 +17,8 @@
         let fik = document.getElementById("fileInputLabel");
         //let sk = document.getElementById("submitKnop");
         if (extra == 'nintendo') {
-            t.innerHTML = "nintendo";
-            s.classList.add("nintendo");
+            t.innerHTML = "Nintendo";
+            s.classList.add("Nintendo");
             s.classList.remove("norm");
             for(let i = 0; i < els.length; i++){els[i].style.color = "white";els[i].style.background = "#E70013";}
             if (fik!=null){fik.style.backgroundColor = "#E70013"};
