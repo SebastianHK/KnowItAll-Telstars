@@ -31,7 +31,7 @@
         s.classList.add("norm");
         n.style.opacity = 0;
         if (x.style.opacity == 1 || extra == 'false') {
-            t.innerHTML = "playstation";
+            t.innerHTML = "Playstation";
             c.checked = false;
             setCookie("achtergrondSlider", false, 100);
             //sk.style.background = "#006FCD";
@@ -44,7 +44,7 @@
             //sk.style.background = "#1DB900";
             if (fik!=null){fik.style.backgroundColor = "#1DB900"};
 
-            t.innerHTML = "xbox";
+            t.innerHTML = "XBOX";
             c.checked = true;
             setCookie("achtergrondSlider", true, 100);
             p.style.opacity = 0;
