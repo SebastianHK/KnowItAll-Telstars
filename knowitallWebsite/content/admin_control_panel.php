@@ -85,7 +85,7 @@ if (isset($_GET["pagina"])) {
 $queryString = zoeken();
 
 $numRowsQuery = numRowsQuery();
-echo "<h1>".$numRowsQuery."</h1>";
+//echo "<h1>".$numRowsQuery."</h1>";
 $RSQS = "SELECT COUNT(id) FROM weetjesdb";
 $numRows = $conn->query($numRowsQuery);
 $numRows = $numRows->fetch_assoc();
