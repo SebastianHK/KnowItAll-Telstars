@@ -114,13 +114,13 @@ $numRows = $numRows['COUNT(id)'];
     <div id="styleSwitch">
         <p id="switchText"></p>
         <label id="styleSlider" class="switch">
-            <input id="sliderCheck" type="checkbox" onclick="styleSlider()">
+                <input id="sliderCheck">
             <span id="slider" class="slider norm round nintendo"></span>
         </label>
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
         <a href="index.php" class="navKnop headerNavKnop">profiel</a>
         <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
         <?php  if ($_SESSION['rank'] == 'admin') : ?>
