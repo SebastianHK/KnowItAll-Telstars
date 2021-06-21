@@ -256,7 +256,7 @@ $numRows = $numRows['COUNT(id)'];
         }
         echo "<p>Resultaten: $numRows</p>";
 
-        echo "<h1>".$sqs."</h1>";
+        //echo "<h1>".$sqs."</h1>";
 
         $result = $conn->query($sqs);
 
