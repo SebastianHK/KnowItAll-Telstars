@@ -43,7 +43,7 @@
             </div>
             <div class="inputVeld">
                 <label>Wachtwoord:</label>
-                <input type="wachtwoord" name="wachtwoord">
+                <input type="password" name="wachtwoord">
             </div>
             <p>
                 Nog geen account? <a href="registratie.php">Registreer</a>
