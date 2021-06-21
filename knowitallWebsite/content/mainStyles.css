@@ -90,6 +90,7 @@ ACHTERGROND \/
     }
 
     input:focus + .slider:before, input:focus + .nintendo:after {
+
     box-shadow: none;
     }
 
