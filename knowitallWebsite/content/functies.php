@@ -28,9 +28,9 @@ function stuur()
     $weetje = htmlspecialchars($_POST["weetje"]);
     $datum = htmlspecialchars($_POST["datum"]);
     $plaatje = htmlspecialchars($_POST["plaatje"]);
+    $titel = htmlspecialchars($_POST["titel"]);
 
-
-    $sql = "INSERT INTO weetjesdb (weetjes, gebruiker, geb_datum, plaatje) VALUES ('$weetje','$gebruiker','$datum','$plaatje')";
+    $sql = "INSERT INTO weetjesdb (weetjes, gebruiker, geb_datum, plaatje, titel) VALUES ('$weetje','$gebruiker','$datum','$plaatje','$titel')";
 
     if (mysqli_query($conn, $sql)) {
 

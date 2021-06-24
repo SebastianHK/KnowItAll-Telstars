@@ -101,7 +101,7 @@ if ($conn -> connect_errno) {
 
         <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
-            <input type="text" required name="titelweetje" id="titelweetje" placeholder="titel" maxlength="50"></input><br>
+            <input type="text" required name="titel" id="titel" placeholder="titel" maxlength="50"></input><br>
             <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
             <p>datum van gebeurd</p>
             <input name="datum" type="date">
@@ -121,8 +121,8 @@ if ($conn -> connect_errno) {
 
 
         <select id="sorteerInput" class="zoekInput" name="sorteer">
-            <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
-            <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
+            <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
+            <option id="geb_datum" value="geb_datum">Ingevoerde datum</option>
             <option id="status" value="status">Status</option>
             <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
         </select>
@@ -133,10 +133,10 @@ if ($conn -> connect_errno) {
         </select>
         <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
         <select id="filterInput" class="zoekInput" name="filter">
-            <option id="uit" value="uit">uit</option>
-            <option id="goedgekeurd" value="goedgekeurd">goedgekeurd</option>
-            <option id="niet_reviewed" value="niet_reviewed">niet reviewed</option>
-            <option id="afgekeurd" value="afgekeurd">afgekeurd</option>
+            <option id="uit" value="uit">Uit</option>
+            <option id="goedgekeurd" value="goedgekeurd">Goedgekeurd</option>
+            <option id="niet_reviewed" value="niet_reviewed">Niet reviewed</option>
+            <option id="afgekeurd" value="afgekeurd">Afgekeurd</option>
         </select>
         <input type="reset" value="reset">
         <input type="submit" value="zoek" name="zoek" class="zoekInput">

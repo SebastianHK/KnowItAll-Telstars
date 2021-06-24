@@ -52,6 +52,13 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+
+if (isset($_SESSION['gebruikersnaam'])) {
+    $gebruikersnaam = $_SESSION['gebruikersnaam'];
+} else {
+    $gebruikersnaam = "gast";
+}
+
 if (count($weetjes) == 0) {
     array_push($weetjes, "Geen weetje bro");
 }
@@ -65,13 +72,18 @@ $conn->close();
                 <span id="slider" class="slider norm round nintendo"></span>
               </label>
     </div>
-    <a class="titel navKnop" href="#top">TheKnowItAll</a>
+    <a class="titel navKnop" href="index.php">TheKnowItAll</a>
     <div class="navKnoppen">
         <a href="content/weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
         <a href="content/index.php" class="navKnop headerNavKnop">profiel</a>
     </div>
 
-<a href="content/index.php" class="navKnop logKnop">login/registreer</a>
+        <?php  if ($gebruikersnaam == 'gast') : ?>
+            <a href="content/login.php" class="navKnop logKnop">login/registreer</a>
+        <?php endif ?>
+        <?php  if ($gebruikersnaam !== 'gast') : ?>
+            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+        <?php endif ?>
 
     </header>
 
