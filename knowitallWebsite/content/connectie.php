@@ -1,17 +1,16 @@
 <?php
 
-//$localhost = "localhost"; #localhost
-//$dbusername = "student4a0_558674"; #username of phpmyadmin
-//$dbpassword = "kryX8I";  #password of phpmyadmin
-//$dbname = "student4a0_558674";  #database name
+$localhost = "localhost"; #localhost
+$dbusername = ""; #username of phpmyadmin
+$dbpassword = "";  #password of phpmyadmin
+$dbname = "";  #database name
 
-
-
+/*
 $localhost = "localhost"; #localhost
 $dbusername = "root"; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
 $dbname = "knowitall";  #database name
-
+*/
 // Vul hier je studenten nummer in:
 $sdn = "558674";
 

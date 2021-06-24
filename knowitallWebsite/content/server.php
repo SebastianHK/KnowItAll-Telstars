@@ -82,9 +82,6 @@ if (isset($_POST['reg_gebruiker'])) {
         } else {
             array_push($errors, "Er ging iets fout bij het maken van het account");
         }
-
-
-
     }
 }
 
@@ -109,17 +106,21 @@ if (isset($_POST['login_gebruiker'])) {
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
             $result = mysqli_fetch_assoc($results);
-            if(password_verify($wachtwoord, $result['wachtwoord'])) {
-                if ($result['verified'] == 1) {
+            if ($result['rank'] != "verbannen") {
+                if(password_verify($wachtwoord, $result['wachtwoord'])) {
+                    if ($result['verified'] == 1) {
                         $_SESSION['gebruikersnaam'] = $gebruikersnaam;
                         $_SESSION['success'] = "Je bent succesvol ingelogd!";
                         $_SESSION['rank'] = $result['rank'];
                         header('location: index.php');
+                    } else {
+                        array_push($errors, "Verifieer je email aub. <form method='post' action=''><input type='hidden' name='gebruikersnaam' value='$gebruikersnaam'><input type='hidden' name='email' value='".$result["email"]."'><input type='submit' name='verifyEmail' value='Stuur email opnieuw'></form>");
+                    }
                 } else {
-                    array_push($errors, "Verifieer je email aub. <form method='post' action=''><input type='hidden' name='gebruikersnaam' value='$gebruikersnaam'><input type='hidden' name='email' value='".$result["email"]."'><input type='submit' name='verifyEmail' value='Stuur email opnieuw'></form>");
+                    array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
                 }
             } else {
-                array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
+                array_push($errors, "Je account is verbannen.");
             }
         } else {
             array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
