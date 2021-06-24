@@ -254,16 +254,26 @@ main {
     height: 13rem; 
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.74);
+    box-shadow: 3px 3px rgba(37, 37, 37, 0.493);
+    
 }
 #labels label {
     position: relative;
-    color: #272727;
+    color: white;
+    font-size: 1.1rem;
+    bottom: 5px;
+   
 }
 #labels label:nth-child(1) {
-    right: 200px;
+    right: 110px;
+}
+#labels label:nth-child(2) {
+    right: 25px;
 }
 .grootBox p {
     line-height: 40px;
+    font-size: 1rem;
+    font-weight: 300;
 }
 #labels {
     margin-top: 3.8rem;
