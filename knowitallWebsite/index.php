@@ -52,11 +52,33 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+session_start();
+// sessions voor de zoekbalk
+if (isset($_SESSION["pSorteer"])) {
+    $pSorteer = $_SESSION["pSorteer"];
+} else {
+    $pSorteer = "";
+}if (isset($_SESSION["pAscDesc"])) {
+    $pAscDesc = $_SESSION["pAscDesc"];
+} else {
+    $pAscDesc = "";
+}
+if (isset($_SESSION['rank'])) {
+    $rank = $_SESSION['rank'];
+} else {
+    $rank = "gast";
+}
 
 if (isset($_SESSION['gebruikersnaam'])) {
     $gebruikersnaam = $_SESSION['gebruikersnaam'];
 } else {
     $gebruikersnaam = "gast";
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['gebruikersnaam']);
+    header("location: index.php");
 }
 
 if (count($weetjes) == 0) {
@@ -75,13 +97,13 @@ $conn->close();
     <a class="titel navKnop" href="index.php">TheKnowItAll</a>
     <div class="navKnoppen">
         <a href="content/weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
-        <a href="content/index.php" class="navKnop headerNavKnop">profiel</a>
     </div>
 
         <?php  if ($gebruikersnaam == 'gast') : ?>
             <a href="content/login.php" class="navKnop logKnop">login/registreer</a>
         <?php endif ?>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
+            <a href="content/index.php" class="navKnop headerNavKnop">profiel</a>
             <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
         <?php endif ?>
 
