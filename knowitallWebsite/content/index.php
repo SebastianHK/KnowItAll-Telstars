@@ -65,14 +65,14 @@ if ($conn -> connect_errno) {
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
-        <a href="index.php" class="navKnop headerNavKnop">profiel</a>
-        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">Weetjes Catalogus</a>
+        <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
+        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
         <?php  if ($_SESSION['rank'] == 'admin') : ?>
-            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
+            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
         <?php endif ?>
     </div>
-        <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+        <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
 
 </header>
 

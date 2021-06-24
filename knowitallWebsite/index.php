@@ -96,15 +96,18 @@ $conn->close();
     </div>
     <a class="titel navKnop" href="index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="content/weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="content/weetjesCat.php" class="navKnop headerNavKnop">Weetjes Catalogus</a>
     </div>
 
         <?php  if ($gebruikersnaam == 'gast') : ?>
-            <a href="content/login.php" class="navKnop logKnop">login/registreer</a>
+            <a href="content/login.php" class="navKnop logKnop">Login/Registreer</a>
         <?php endif ?>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
-            <a href="content/index.php" class="navKnop headerNavKnop">profiel</a>
-            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+            <a href="content/index.php" class="navKnop headerNavKnop">Profiel</a>
+            <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
+        <?php endif ?>
+        <?php  if ($rank == 'admin') : ?>
+            <a href="content/admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
         <?php endif ?>
 
     </header>

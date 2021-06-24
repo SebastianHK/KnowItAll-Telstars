@@ -69,17 +69,17 @@ if ($conn -> connect_errno) {
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="" class="navKnop headerNavKnop">Weetjes Catalogus</a>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
-            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
-            <a href="index.php" class="navKnop headerNavKnop">profiel</a>
-            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+            <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
+            <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
+            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
         <?php endif ?>
         <?php  if ($gebruikersnaam == 'gast') : ?>
-            <a href="index.php" class="navKnop logKnop">login/registreer</a>
+            <a href="index.php" class="navKnop logKnop">Login/Registreer</a>
         <?php endif ?>
         <?php  if ($rank == 'admin') : ?>
-            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
+            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
         <?php endif ?>
 
     </div>
@@ -121,15 +121,15 @@ if ($conn -> connect_errno) {
 
 
             <select id="sorteerInput" class="zoekInput" name="sorteer">
-                <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
-                <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
+                <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
+                <option id="geb_datum" value="geb_datum">Ingevoerde Datum</option>
                 <option id="status" value="status">Status</option>
                 <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
             </select>
 
             <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
-                <option id="ASC" value="ASC">ASC</option>
-                <option id="DESC" value="DESC">DESC</option>
+                <option id="ASC" value="ASC">Oplopend</option>
+                <option id="DESC" value="DESC">Aflopend</option>
             </select>
             <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
 

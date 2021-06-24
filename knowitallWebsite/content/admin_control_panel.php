@@ -120,14 +120,14 @@ $numRows = $numRows['COUNT(id)'];
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
-        <a href="index.php" class="navKnop headerNavKnop">profiel</a>
-        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">Weetjes Catalogus</a>
+        <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
+        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
         <?php  if ($_SESSION['rank'] == 'admin') : ?>
-            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
+            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
         <?php endif ?>
     </div>
-    <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+    <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
 
 </header>
 
@@ -173,7 +173,7 @@ $numRows = $numRows['COUNT(id)'];
             <label for="gebruiker">Gebruikersnaam</label>
             <label for="sorteer">Sorteer</label>
             <label></label>
-            <label for="gebDatum">datum gebeurd</label>
+            <label for="gebDatum">Datum gebeurd</label>
             <label for="filter">Filter</label>
             <!--<input class="zoekInput" type="text" name="gebruiker" placeholder="gebruiker">-->
             <input list="gebruikers" value="" name="gebruiker" id="gebruikerDataList" class="zoekInput">
@@ -189,22 +189,22 @@ $numRows = $numRows['COUNT(id)'];
             </datalist>
 
             <select id="sorteerInput" class="zoekInput" name="sorteer">
-                <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
-                <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
+                <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
+                <option id="geb_datum" value="geb_datum">Ingevoerde Datum</option>
                 <option id="status" value="status">Status</option>
                 <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
             </select>
 
             <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
-                <option id="ASC" value="ASC">ASC</option>
-                <option id="DESC" value="DESC">DESC</option>
+                <option id="ASC" value="ASC">Oplopend</option>
+                <option id="DESC" value="DESC">Aflopend</option>
             </select>
             <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
             <select id="filterInput" class="zoekInput" name="filter">
                 <option id="uit" value="uit">uit</option>
-                <option id="goedgekeurd" value="goedgekeurd">goedgekeurd</option>
-                <option id="niet_reviewed" value="niet_reviewed">niet reviewed</option>
-                <option id="afgekeurd" value="afgekeurd">afgekeurd</option>
+                <option id="goedgekeurd" value="goedgekeurd">Goedgekeurd</option>
+                <option id="niet_reviewed" value="niet_reviewed">Niet reviewed</option>
+                <option id="afgekeurd" value="afgekeurd">Afgekeurd</option>
             </select>
             <input type="reset" value="reset">
             <input type="submit" value="zoek" name="zoek" class="zoekInput">
