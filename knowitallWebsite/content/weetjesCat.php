@@ -150,16 +150,16 @@ if ($conn -> connect_errno) {
             <p class="tooltip">ID
                 <span class="tooltiptext">ID van het weetje</span>
             </p> -
-            <p class="tooltip">titel
-                <span class="tooltiptext">titel van het weetje</span>
+            <p class="tooltip">Titel
+                <span class="tooltiptext">Titel van het weetje</span>
             </p> -
-            <p class="tooltip">plaats datum
+            <p class="tooltip">Geplaatst op
                 <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
             </p> -
-            <p class="tooltip">ingevoerde datum
+            <p class="tooltip">Ingevoerde datum
                 <span class="tooltiptext">Datum dat de gebruiker heeft ingevoerd van wanneer het gebeurt is</span>
             </p> -
-            <p class="tooltip">status
+            <p class="tooltip">Status
                 <span class="tooltiptext">Satus van het weetje</span>
             </p> -
         </div>
