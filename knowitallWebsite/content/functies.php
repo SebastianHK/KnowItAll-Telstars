@@ -69,7 +69,6 @@ function edit($weetjesArr, $conn) {
                 $wGeb_datum = $row['geb_datum'];
                 $wPlaatje = $row['plaatje'];
                 $wStatus = $row['status'];
-                $comment =$row['comment'];
                 echo '
 <div id="editFormBackground">
     <form id="editForm" method="post">
@@ -78,7 +77,7 @@ function edit($weetjesArr, $conn) {
             <input name="eID" id="eID" readonly type="text" value="'.$wID.'">
             <label for="eGebruikersnaam">Gebruiker:</label>
             <input name="eGebruikersnaam" id="eGebruikersnaam" readonly type="text" value="'.$wGebruikersnaam.'">
-            <label for="ePlaats_datum">Plaats datum:</label>
+            <label for="ePlaats_datum">Geplaatst op:</label>
             <input name="ePlaats_datum" id="ePlaats_datum" readonly type="date" value="'.$plaats_datum.'">
             <label for="eGeb_datum">Ingevoerde datum:</label>
             <input name="eGeb_datum" id="eGeb_datum" type="date" value="'.$wGeb_datum.'">
@@ -86,16 +85,15 @@ function edit($weetjesArr, $conn) {
             <input name="ePlaatje" id="ePlaatje" type="text" value="'.$wPlaatje.'">
             <label for="eStatus">Status:</label>
             <select name="eStatus" id="eStatus">
-                <option '. (($wStatus=='goedgekeurd')?'selected="selected"':"") .' value="goedgekeurd">goedgekeurd</option>
-                <option '. (($wStatus=='afgekeurd')?'selected="selected"':"") .' value="afgekeurd">afgekeurd</option>
-                <option '. (($wStatus=='niet_reviewed')?'selected="selected"':"") .' value="niet_reviewed">niet_reviewed</option>
+                <option '. (($wStatus=='goedgekeurd')?'selected="selected"':"") .' value="goedgekeurd">Goedgekeurd</option>
+                <option '. (($wStatus=='afgekeurd')?'selected="selected"':"") .' value="afgekeurd">Afgekeurd</option>
+                <option '. (($wStatus=='niet_reviewed')?'selected="selected"':"") .' value="niet_reviewed">Niet reviewed</option>
             </select>
         </div>
         <textarea name="eWeetje">'.$weetje.'</textarea>
-        <textarea name="eComment" placeholder="bericht aan gebruiker...">'. $comment .'</textarea>
-        <input class="submitKnop" type="reset" value="reset" >
-        <input class="submitKnop" type="submit" value="cancel" name="editCancel">
-        <input class="submitKnop" type="submit" value="klaar" name="editKlaar">
+        <input class="submitKnop" type="reset" value="Reset" >
+        <input class="submitKnop" type="submit" value="Cancel" name="editCancel">
+        <input class="submitKnop" type="submit" value="Klaar" name="editKlaar">
     </form>
 </div>
                 ';
@@ -116,13 +114,11 @@ function editKlaar($weetjesArr, $conn)
     $ePlaatje = $_POST["ePlaatje"];
     $eStatus = $_POST["eStatus"];
     $eWeetje = $_POST["eWeetje"];
-    $eComment = $_POST["eComment"];
     $sql = "UPDATE weetjesdb SET 
                      geb_datum='$eGeb_datum', 
                      plaatje='$ePlaatje',
                      status='$eStatus',
                      weetjes='$eWeetje',
-                     comment='$eComment'
                      WHERE id=$eID";
 
     if (mysqli_query($conn, $sql)) {

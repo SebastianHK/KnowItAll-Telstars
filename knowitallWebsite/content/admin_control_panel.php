@@ -227,22 +227,22 @@ $numRows = $numRows['COUNT(id)'];
             <p class="tooltip">ID
                 <span class="tooltiptext">ID van het weetje</span>
             </p> -
-            <p class="tooltip">gebruiker
+            <p class="tooltip">Gebruiker
                 <span class="tooltiptext">Naam van gebruiker</span>
             </p> -
-            <p class="tooltip">titel
+            <p class="tooltip">Titel
                 <span class="tooltiptext">Titel van het weetje</span>
             </p> -
-            <p class="tooltip">plaats datum
+            <p class="tooltip">Geplaatst op
                 <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
             </p> -
-            <p class="tooltip">ingevoerde datum
+            <p class="tooltip">Ingevoerde datum
                 <span class="tooltiptext">Datum dat de gebruiker heeft ingevoerd van wanneer het gebeurt is</span>
             </p> -
-            <p class="tooltip">status
+            <p class="tooltip">Status
                 <span class="tooltiptext">Satus van het weetje</span>
             </p> -
-            <p class="tooltip">edit tools
+            <p class="tooltip">Edit tools
                 <span class="tooltiptext">Verwijder of pas een weetje aan</span>
             </p>
         </div>
