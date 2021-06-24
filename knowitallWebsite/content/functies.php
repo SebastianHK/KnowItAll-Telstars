@@ -3,7 +3,7 @@
 //unset($_SESSION["geplaatst"]);
 //unset($_SESSION["oudTijd"]);
 //unset($_SESSION["nieuwTijd"]);
-function stuur()
+/*function stuur()
 {
     global $gebruiker, $conn;
     // if (isset($_SESSION["geplaatst"])) {
@@ -45,7 +45,7 @@ function stuur()
 
         // }
     }
-}
+}*/
 
 function delZSession() {
     unset($_SESSION["pGebruikersnaam"]);
@@ -135,7 +135,7 @@ function editKlaar($weetjesArr, $conn)
 }
 
 
-function zoeken()
+function zoeken($currentPage)
 {
     global $huidigPage;
     if (isset($_POST['zoek'])) {
@@ -143,17 +143,32 @@ function zoeken()
         delZSession();
         selectQueryMaker("RESET",'');
         $pSorteer = $_POST['sorteer'];
+        $_SESSION["pSorteer"] = $pSorteer;
         $pAscDesc = $_POST['ascDesc'];
-        $pFilter = $_POST['filter'];
+        $_SESSION["pAscDesc"] = $pAscDesc;
+        if (isset($_POST['filter'])) {
+            $pFilter = $_POST['filter'];
+            $_SESSION["pFilter"] = $pFilter;
+        } else if ($currentPage === "weetjesCat") {
+            $pFilter = "goedgekeurd";
+            $_SESSION["pFilter"] = "goedgekeurd";
+        }
+
         $pGebDatum = $_POST['gebDatum'];
-        $pGebruikersnaam = $_POST['gebruiker'];
+        $_SESSION["pGebDatum"] = $pGebDatum;
+
         selectQueryMaker("FROM",'weetjesdb');
         if ($pFilter != "uit") {
             selectQueryMaker("WHERE",'status='.$pFilter);
-        } if ($pGebruikersnaam != null) {
-            selectQueryMaker("WHERE",'gebruiker='.$pGebruikersnaam);
-
-        } if ($pGebDatum != null) {
+        } if ($currentPage === "admin") {
+            if (isset($_POST['gebruiker']) && $_POST['gebruiker'] != null) {
+                selectQueryMaker("WHERE",'gebruiker='.$_POST['gebruiker']);
+                $_SESSION["pGebruikersnaam"] = $_POST['gebruiker'];
+            }
+        } else if ($currentPage === "profiel") {
+            selectQueryMaker("WHERE",'gebruiker='.$_SESSION["gebruikersnaam"]);
+        }
+        if ($pGebDatum != null) {
             selectQueryMaker("WHERE",'geb_datum='.$pGebDatum);
         }
         selectQueryMaker("ORDER BY",$pSorteer);
@@ -162,17 +177,38 @@ function zoeken()
 
     } else if (isset($_SESSION["pSorteer"])) {
 
+        if ($currentPage === "profiel") {
+            selectQueryMaker("WHERE",'gebruiker='.$_SESSION["gebruikersnaam"]);
+        } elseif (isset($_SESSION["pGebruikersnaam"]) && $_SESSION["pGebruikersnaam"] != null && $currentPage === "admin") {
+            selectQueryMaker("WHERE",'gebruiker='.$_SESSION["pGebruikersnaam"]);
+        }
+        if ($currentPage === "weetjesCat") {
+            selectQueryMaker("WHERE",'status=goedgekeurd');
+        } elseif ($_SESSION["pFilter"] != "uit") {
+            selectQueryMaker("WHERE",'status='.$_SESSION["pFilter"]);
+
+        }
+        if ($_SESSION["pGebDatum"] != null) {
+            selectQueryMaker("WHERE",'geb_datum='.$_SESSION["pGebDatum"]);
+        }
+        selectQueryMaker("ORDER BY",$_SESSION["pSorteer"]);
+        selectQueryMaker("ASCDESC",$_SESSION["pAscDesc"]);
         $offset = $huidigPage*15;
         selectQueryMaker("LIMIT",$offset.', 15');
     } else {
-        selectQueryMaker("RESET",'');
-        selectQueryMaker("FROM",'weetjesdb');
 
+        if ($currentPage === "profiel") {
+            selectQueryMaker("WHERE",'gebruiker='.$_SESSION["gebruikersnaam"]);
+        } elseif ($currentPage === "weetjesCat") {
+            selectQueryMaker("WHERE",'status=goedgekeurd');
+        }
         $offset = $huidigPage*15;
         selectQueryMaker("LIMIT",$offset.', 15');
-        selectQueryMaker("DONE",'');
+
     }
-    return $queryString = selectQueryMaker("DONE",'');
+    $queryString = selectQueryMaker("DONE",'');
+    //echo "<h1>".$queryString."</h1>";
+    return $queryString;
 
 }
 

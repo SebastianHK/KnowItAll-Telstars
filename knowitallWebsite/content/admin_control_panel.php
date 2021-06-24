@@ -1,6 +1,15 @@
 <?php
 session_start();
-
+require "classes/weetjeZender.php";
+$huidigPage = 0;
+if (isset($_GET["pagina"])) {
+    $huidigPage = $_GET["pagina"];
+    if ($huidigPage < 0) {
+        $huidigPage = 0;
+    }
+}
+include "functies.php";
+$queryString = zoeken("admin");
 // sessions voor de zoekbalk
 if (isset($_SESSION["pGebruikersnaam"])) {
     $pGebruikersnaam = $_SESSION["pGebruikersnaam"];
@@ -18,6 +27,10 @@ if (isset($_SESSION["pGebruikersnaam"])) {
     $pFilter = $_SESSION["pFilter"];
 } else {
     $pFilter = "";
+} if (isset($_SESSION["pGebDatum"])) {
+    $pGeb_datum = $_SESSION["pGebDatum"];
+} else {
+    $pGeb_datum = "";
 }
 
 // check of je wel ingelogd bent en of je wel een admin bent
@@ -70,19 +83,15 @@ if ($result->num_rows > 0) {
     echo '<script>errorr(true, "Geen resultaten gevonden")</script>';
 }
 
-include "functies.php";
+
 $gebruiker = $_SESSION['gebruikersnaam'];
 if(isset($_POST["submit"])) {
-    stuur();
+    new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
+    //stuur();
 }
-$huidigPage = 0;
-if (isset($_GET["pagina"])) {
-    $huidigPage = $_GET["pagina"];
-    if ($huidigPage < 0) {
-        $huidigPage = 0;
-    }
-}
-$queryString = zoeken();
+
+
+
 
 $numRowsQuery = numRowsQuery();
 //echo "<h1>".$numRowsQuery."</h1>";
@@ -192,7 +201,7 @@ $numRows = $numRows['COUNT(id)'];
                 <option id="plaats_datum" value="plaats_datum">Datum geplaatst</option>
                 <option id="geb_datum" value="geb_datum">Datum gebeurtenis</option>
                 <option id="status" value="status">Status</option>
-                <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
+                <option id="gebruiker" value="gebruiker">Gebruikersnaam</option>
             </select>
 
             <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
@@ -219,6 +228,8 @@ $numRows = $numRows['COUNT(id)'];
             echo 'document.getElementById("ascDescInput").selectedIndex = document.getElementById("ascDescInput").options.namedItem("' . $pAscDesc . '").index;';
         } if($pFilter!=''){
             echo 'document.getElementById("filterInput").selectedIndex = document.getElementById("filterInput").options.namedItem("' . $pFilter . '").index;';
+        } if ($pGeb_datum!=''){
+            echo 'document.getElementById("gebDatum").value="' . $pGeb_datum . '";';
         }
 
         ?>
@@ -270,12 +281,16 @@ $numRows = $numRows['COUNT(id)'];
                 $gebruikersnaam = $row['gebruiker'];
                 $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
-
                 $weetjesArr['weetje.'.$ID] = $row['weetjes'];
+                if ($row['geb_datum'] == "0000-00-00") {
+                    $geb_datum = "NVT";
+                } else {
+                    $geb_datum = date('d-m-Y',strtotime($row['geb_datum']));
+                }
 
                 echo '<div id=weetjeDiv'.$c.' class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. $gebruikersnaam .'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'. $gebruikersnaam .'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$geb_datum.'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
                                  <form class='invis editForm' method='POST' action=''>
                                        <input type='hidden' name='ID' value='$ID'>
@@ -327,7 +342,7 @@ $numRows = $numRows['COUNT(id)'];
                         <input class='limitKnop $c' type='submit' value='$s'>
                       </form>";
             }
-            if ($huidigPage <=! $numRows/15+1) {
+            if ($huidigPage <=! $numRows/15) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
                         <input class='limitKnop huidig' type='submit' value='>'>

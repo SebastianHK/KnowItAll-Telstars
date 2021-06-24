@@ -1,5 +1,16 @@
 <?php
 session_start();
+require "classes/weetjeZender.php";
+$huidigPage = 0;
+if (isset($_GET["pagina"])) {
+    $huidigPage = $_GET["pagina"];
+    if ($huidigPage < 0) {
+        $huidigPage = 0;
+    }
+}
+include 'functies.php';
+$sqs = zoeken("profiel");
+
 // sessions voor de zoekbalk
 if (isset($_SESSION["pSorteer"])) {
     $pSorteer = $_SESSION["pSorteer"];
@@ -13,6 +24,10 @@ if (isset($_SESSION["pSorteer"])) {
     $pFilter = $_SESSION["pFilter"];
 } else {
     $pFilter = "";
+}if (isset($_SESSION["pGebDatum"])) {
+    $pGeb_datum = $_SESSION["pGebDatum"];
+} else {
+    $pGeb_datum = "";
 }
 $rank = $_SESSION['rank'];
 if (!isset($_SESSION['gebruikersnaam'])) {
@@ -34,7 +49,6 @@ if ($conn -> connect_errno) {
     echo "Failed to connect to MySQL: " . $conn -> connect_error;
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -124,7 +138,6 @@ if ($conn -> connect_errno) {
             <option id="plaats_datum" value="plaats_datum">Datum geplaatst</option>
             <option id="geb_datum" value="geb_datum">Datum gebeurtenis</option>
             <option id="status" value="status">Status</option>
-            <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
         </select>
 
         <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
@@ -149,6 +162,8 @@ if ($conn -> connect_errno) {
             echo 'document.getElementById("ascDescInput").selectedIndex = document.getElementById("ascDescInput").options.namedItem("' . $pAscDesc . '").index;';
         } if($pFilter!=''){
             echo 'document.getElementById("filterInput").selectedIndex = document.getElementById("filterInput").options.namedItem("' . $pFilter . '").index;';
+        }if ($pGeb_datum!=''){
+            echo 'document.getElementById("gebDatum").value="' . $pGeb_datum . '";';
         }
 
         ?>
@@ -174,14 +189,14 @@ if ($conn -> connect_errno) {
         </p>
     </div>
         <?php
-        include 'functies.php';
+
 
         $gebruiker = $_SESSION['gebruikersnaam'];
         if(isset($_POST["submit"])) {
-            stuur();
+            new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
+            //stuur();
         }
-        $sqs = "SELECT * FROM `weetjesDB` WHERE gebruiker='$gebruiker' LIMIT 15";
-        $huidigPage = 0;
+        /*$huidigPage = 0;
         if (isset($_POST["limit"])) {
             //echo '<h1>'.$_POST["limit"].'</h1>';
             $huidigPage = $_POST["limitPage"];
@@ -192,7 +207,7 @@ if ($conn -> connect_errno) {
             }
             $sqs = "SELECT * FROM `weetjesDB` WHERE gebruiker='$gebruiker' LIMIT 15 OFFSET $offset";
             echo $sqs;
-        }
+        }*/
 
 
         $result = $conn->query($sqs);
@@ -211,12 +226,16 @@ if ($conn -> connect_errno) {
                 $gebruikersnaam = $row['gebruiker'];
                 $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
-
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
+                if ($row['geb_datum'] == "0000-00-00") {
+                    $geb_datum = "NVT";
+                } else {
+                    $geb_datum = date('d-m-Y',strtotime($row['geb_datum']));
+                }
 
                 echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.date('d-m-Y',strtotime($row['geb_datum'])).'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.$geb_datum.'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
                                 <form class='invis' onsubmit='return kill()' method='POST' action=''>
                                         <input type='hidden' name='ID' value='$ID'>
@@ -259,7 +278,7 @@ if ($conn -> connect_errno) {
                         <input class='limitKnop $c' type='submit' value='$s'>
                       </form>";
             }
-            if ($huidigPage <=! $numRows/15+1) {
+            if ($huidigPage <=! $numRows/15) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
                         <input class='limitKnop huidig' type='submit' value='>'>

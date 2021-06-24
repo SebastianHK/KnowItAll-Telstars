@@ -1,5 +1,16 @@
 <?php
 session_start();
+require "classes/weetjeZender.php";
+$huidigPage = 0;
+if (isset($_GET["pagina"])) {
+    $huidigPage = $_GET["pagina"];
+    if ($huidigPage < 0) {
+        $huidigPage = 0;
+    }
+}
+include 'functies.php';
+$sqs = zoeken("weetjesCat");
+
 // sessions voor de zoekbalk
 if (isset($_SESSION["pSorteer"])) {
     $pSorteer = $_SESSION["pSorteer"];
@@ -121,9 +132,8 @@ if ($conn -> connect_errno) {
 
 
             <select id="sorteerInput" class="zoekInput" name="sorteer">
-                <option id="plaats_datum" value="plaats_datum">Datum geplaatst</option>
-                <option id="geb_datum" value="geb_datum">Datum gebeurtenis</option>
-                <option id="status" value="status">Status</option>
+                <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
+                <option id="geb_datum" value="geb_datum">Ingevoerde Datum</option>
                 <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
             </select>
 
@@ -161,25 +171,14 @@ if ($conn -> connect_errno) {
             </p>
         </div>
         <?php
-        include 'functies.php';
 
         $gebruiker = $gebruikersnaam;
         if(isset($_POST["submit"])) {
-            stuur();
+            new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
+            //stuur();
         }
-        $sqs = "SELECT * FROM `weetjesDB` WHERE status='goedgekeurd' LIMIT 15";
         $huidigPage = 0;
-        if (isset($_POST["limit"])) {
-            echo '<h1>'.$_POST["limit"].'</h1>';
-            $huidigPage = $_POST["limitPage"];
-            echo '<h1>'.$_POST["limitPage"].'</h1>';
-            $offset = $huidigPage*15;
-            if ($huidigPage < 0) {
-                $huidigPage = 1;
-            }
-            $sqs = "SELECT * FROM `weetjesDB` WHERE status='goedgekeurd' LIMIT 15 OFFSET $offset";
-            echo $sqs;
-        }
+
 
 
         $result = $conn->query($sqs);

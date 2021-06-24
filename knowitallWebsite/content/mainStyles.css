@@ -211,7 +211,7 @@ header {
     transition: 0.1s color ease-in;
 }
 .navKnop:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(212, 212, 212);
 }
 .headerNavKnop {
     margin-left: 1.5rem;
