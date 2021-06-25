@@ -101,14 +101,14 @@ if ($conn -> connect_errno) {
 
         <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
-            <input type="text" required name="titel" id="titel" placeholder="titel" maxlength="50"></input><br>
-            <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
-            <p>datum van gebeurd</p>
+            <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
+            <textarea required name="weetje" id="weetje" placeholder="Hier je weetje" maxlength="400"></textarea><br>
+            <p>Gebeurtenis datum</p>
             <input name="datum" type="date">
             <div id="fileInputContainer">
                 <input hidden id="fileInput" name="plaatje" type="file" name="image[]" /><br>
                 <label id="fileInputLabel" for="fileInput">Bladeren...</label>
-                <span id="file-chosen">Geen file gekozen</span>
+                <span id="file-chosen">Geen bestand gekozen</span>
             </div>
             <input class="submitKnop" type="submit" name="submit" value="VERSTUUR">
         </form>
@@ -116,7 +116,7 @@ if ($conn -> connect_errno) {
     <form id="zoekCentrum" action="" method="post">
         <label for="sorteer">Sorteer</label>
         <label></label>
-        <label for="gebDatum">datum gebeurd</label>
+        <label for="gebDatum">Datum gebeurd</label>
         <label for="filter">Filter</label>
 
 
