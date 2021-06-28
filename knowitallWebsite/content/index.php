@@ -65,14 +65,14 @@ if ($conn -> connect_errno) {
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="weetjesCat.php" class="navKnop headerNavKnop">Weetjes Catalogus</a>
-        <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
-        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
+        <a href="weetjesCat.php" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="index.php" class="navKnop headerNavKnop">profiel</a>
+        <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
         <?php  if ($_SESSION['rank'] == 'admin') : ?>
-            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
+            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
         <?php endif ?>
     </div>
-        <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
+        <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
 
 </header>
 
@@ -103,12 +103,14 @@ if ($conn -> connect_errno) {
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
             <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
             <textarea required name="weetje" id="weetje" placeholder="Hier je weetje" maxlength="400"></textarea><br>
-            <p>Gebeurtenis datum</p>
+            <input type="text" required name="titel" id="titel" placeholder="titel" maxlength="50"></input><br>
+            <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
+            <p>datum van gebeurd</p>
             <input name="datum" type="date">
             <div id="fileInputContainer">
-                <input hidden id="fileInput" name="plaatje" type="file" name="image[]" /><br>
+                <input hidden id="fileInput" name="plaatje" type="file" name="plaatje" /><br>
                 <label id="fileInputLabel" for="fileInput">Bladeren...</label>
-                <span id="file-chosen">Geen bestand gekozen</span>
+                <span id="file-chosen">Geen file gekozen</span>
             </div>
             <input class="submitKnop" type="submit" name="submit" value="VERSTUUR">
         </form>
@@ -116,13 +118,13 @@ if ($conn -> connect_errno) {
     <form id="zoekCentrum" action="" method="post">
         <label for="sorteer">Sorteer</label>
         <label></label>
-        <label for="gebDatum">Datum gebeurd</label>
+        <label for="gebDatum">datum gebeurd</label>
         <label for="filter">Filter</label>
 
 
         <select id="sorteerInput" class="zoekInput" name="sorteer">
-            <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
-            <option id="geb_datum" value="geb_datum">Ingevoerde datum</option>
+            <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
+            <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
             <option id="status" value="status">Status</option>
             <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
         </select>
@@ -133,10 +135,10 @@ if ($conn -> connect_errno) {
         </select>
         <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
         <select id="filterInput" class="zoekInput" name="filter">
-            <option id="uit" value="uit">Uit</option>
-            <option id="goedgekeurd" value="goedgekeurd">Goedgekeurd</option>
-            <option id="niet_reviewed" value="niet_reviewed">Niet reviewed</option>
-            <option id="afgekeurd" value="afgekeurd">Afgekeurd</option>
+            <option id="uit" value="uit">uit</option>
+            <option id="goedgekeurd" value="goedgekeurd">goedgekeurd</option>
+            <option id="niet_reviewed" value="niet_reviewed">niet reviewed</option>
+            <option id="afgekeurd" value="afgekeurd">afgekeurd</option>
         </select>
         <input type="reset" value="reset">
         <input type="submit" value="zoek" name="zoek" class="zoekInput">
@@ -204,6 +206,8 @@ if ($conn -> connect_errno) {
         $weetjesArr = Array();
 
         if ($result->num_rows > 0) {
+             $i = 0;
+
             while($row = $result->fetch_assoc()) {
                 $ID = $row['id'];
                 $gebruikersnaam = $row['gebruiker'];
@@ -212,7 +216,7 @@ if ($conn -> connect_errno) {
 
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
 
-                echo '<div class="weetjeDiv">
+                echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">
                         <div class="weetjeInfo">
                         <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. date('d-m-Y',strtotime($row['plaats_datum'])) .'</p> - <p>'.date('d-m-Y',strtotime($row['geb_datum'])).'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
@@ -225,8 +229,13 @@ if ($conn -> connect_errno) {
                         </div>
                            <hr>
                            <p class='weetje'>". $row['weetjes']."</p>
+                           <button class='op-btn' onclick='plaatje_weetje(this.parentElement.id)'>meer...</button>
+                           <div class ='extent'>
+                           <img src='images/images_user/".$row['plaatje']."'>
+                            </div>
+                          
                     </div>";
-
+                $i++;
             }
         } else {
             echo "<div class='error'><p>Je hebt nog geen weetjes</p></div>";
