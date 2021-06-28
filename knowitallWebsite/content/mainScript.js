@@ -117,3 +117,15 @@ function kill() {
         return false;
     }
 }
+
+function plaatje_weetje(extent){
+    console.log(extent);
+    let ding = document.getElementById(extent);
+    if(ding.style.height=='100%'){
+        ding.style.height="200px";
+    }else{
+        ding.style.height="100%";
+
+    }
+    
+}
