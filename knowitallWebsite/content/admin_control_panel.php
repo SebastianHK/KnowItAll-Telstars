@@ -328,7 +328,7 @@ $numRows = $numRows['COUNT(id)'];
             if ($huidigPage != 0) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage1'>
-                        <input class='limitKnop huidig' type='submit' value='<'>
+                        <input class='limitKnop huidig' type='submit' value='❮'>
                       </form>";
             }
 

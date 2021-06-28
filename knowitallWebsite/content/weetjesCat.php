@@ -223,7 +223,7 @@ if ($conn -> connect_errno) {
             if ($huidigPage != 0) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage1'>
-                        <input class='limitKnop huidig' type='submit' value='<'>
+                        <input class='limitKnop huidig' type='submit' value='❮'>
                       </form>";
             }
 
@@ -239,7 +239,7 @@ if ($conn -> connect_errno) {
             if ($huidigPage <=! $numRows/15+1) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
-                        <input class='limitKnop huidig' type='submit' value='>'>
+                        <input class='limitKnop huidig' type='submit' value='❯'>
                   </form>";
             }
 
