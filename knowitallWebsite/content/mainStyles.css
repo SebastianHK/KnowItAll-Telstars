@@ -436,9 +436,10 @@ main {
     min-height: 0;
     justify-content: space-between;
 }
-/* .weetje {
-
-} */
+.weetje {
+    width: 100%;
+    word-wrap: break-word;
+}
 .verwijder {
     text-align: center;
     background-image: url("images/verwijder2.png");
