@@ -101,8 +101,6 @@ if ($conn -> connect_errno) {
 
         <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
-            <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
-            <textarea required name="weetje" id="weetje" placeholder="Hier je weetje" maxlength="400"></textarea><br>
             <input type="text" required name="titel" id="titel" placeholder="titel" maxlength="50"></input><br>
             <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
             <p>datum van gebeurd</p>
