@@ -69,17 +69,17 @@ if ($conn -> connect_errno) {
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">Weetjes Catalogus</a>
+        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
-            <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
-            <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
-            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
+            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
+            <a href="index.php" class="navKnop headerNavKnop">profiel</a>
+            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
         <?php endif ?>
         <?php  if ($gebruikersnaam == 'gast') : ?>
-            <a href="index.php" class="navKnop logKnop">Login/Registreer</a>
+            <a href="index.php" class="navKnop logKnop">login/registreer</a>
         <?php endif ?>
         <?php  if ($rank == 'admin') : ?>
-            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin Control Panel</a>
+            <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
         <?php endif ?>
 
     </div>
@@ -107,7 +107,7 @@ if ($conn -> connect_errno) {
         <p>datum van gebeurd</p>
         <input name="datum" type="date">
         <div id="fileInputContainer">
-            <input hidden id="fileInput" name="plaatje" type="file" name="image[]" /><br>
+            <input hidden id="fileInput" name="plaatje" type="file" name="image" /><br>
             <label id="fileInputLabel" for="fileInput">Bladeren...</label>
             <span id="file-chosen">Geen file gekozen</span>
         </div>
@@ -121,15 +121,15 @@ if ($conn -> connect_errno) {
 
 
             <select id="sorteerInput" class="zoekInput" name="sorteer">
-                <option id="plaats_datum" value="plaats_datum">Datum Geplaatst</option>
-                <option id="geb_datum" value="geb_datum">Ingevoerde Datum</option>
+                <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
+                <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
                 <option id="status" value="status">Status</option>
                 <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
             </select>
 
             <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
-                <option id="ASC" value="ASC">Oplopend</option>
-                <option id="DESC" value="DESC">Aflopend</option>
+                <option id="ASC" value="ASC">ASC</option>
+                <option id="DESC" value="DESC">DESC</option>
             </select>
             <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
 
@@ -194,6 +194,7 @@ if ($conn -> connect_errno) {
         $weetjesArr = Array();
 
         if ($result->num_rows > 0) {
+            $i=0;
             while($row = $result->fetch_assoc()) {
                 $ID = $row['id'];
                 $gebruikersnaam = $row['gebruiker'];
@@ -202,15 +203,20 @@ if ($conn -> connect_errno) {
 
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
 
-                echo '<div class="weetjeDiv">
+                echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">
                         <div class="weetjeInfo">
                         <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
                         </div>
-                           <hr>
-                           <p class='weetje'>". $row['weetjes']."</p>
-                    </div>";
+                        <hr>
+                        <p class='weetje'>". $row['weetjes']."</p>
+                        <button onclick='plaatje_weetje(this.parentElement.id)' class='op-btn'>meer...</button>
+                       <div class='extent'>
+                       <img src='images/images_user/".$row['plaatje']."'>
+                        </div>
+                 </div>";
+             $i++;
+         }
 
-            }
         } else {
             echo "<div class='error'><p>Je hebt nog geen weetjes</p></div>";
         }
