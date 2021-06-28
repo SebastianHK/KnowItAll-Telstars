@@ -6,43 +6,44 @@
 function stuur()
 {
     global $gebruiker, $conn;
-    if (isset($_SESSION["geplaatst"])) {
+    // if (isset($_SESSION["geplaatst"])) {
         //echo "Sessie Geplaatst: ".$_SESSION["geplaatst"];
-        $nieuwMin = $_SESSION["nieuwTijd"][0];
-        $oudMin = $_SESSION["oudTijd"][0];
-        $nieuwH = $_SESSION["nieuwTijd"][1];
-        $oudH = $_SESSION["oudTijd"][1];
-        $nieuwD = $_SESSION["nieuwTijd"][2];
-        $oudD = $_SESSION["oudTijd"][2];
+        // $nieuwMin = $_SESSION["nieuwTijd"][0];
+        // $oudMin = $_SESSION["oudTijd"][0];
+        // $nieuwH = $_SESSION["nieuwTijd"][1];
+        // $oudH = $_SESSION["oudTijd"][1];
+        // $nieuwD = $_SESSION["nieuwTijd"][2];
+        // $oudD = $_SESSION["oudTijd"][2];
 
         //echo '<p>' . $_SESSION["geplaatst"] . '</p>';
-        if ($_SESSION["geplaatst"] > 10 && abs($nieuwMin - $oudMin) < 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
-            echo "<div class='error'><p>Je hebt te veel berichten geplaatst in een korte tijd!</p></div>";
-            if (abs($nieuwMin - $oudMin) > 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
-                $_SESSION["geplaatst"] = 0;
-            }
-            return;
-        }
-    }
+    //     if ($_SESSION["geplaatst"] > 10 && abs($nieuwMin - $oudMin) < 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
+    //         echo "<div class='error'><p>Je hebt te veel berichten geplaatst in een korte tijd!</p></div>";
+    //         if (abs($nieuwMin - $oudMin) > 20 || $nieuwH !== $oudH || $nieuwD !==$oudD) {
+    //             $_SESSION["geplaatst"] = 0;
+    //         }
+    //         return;
+    //     }
+    // }
 
     $weetje = htmlspecialchars($_POST["weetje"]);
     $datum = htmlspecialchars($_POST["datum"]);
-    $plaatje = htmlspecialchars($_POST["plaatje"]);
-    $titel = htmlspecialchars($_POST["titel"]);
+    $image = $_FILES['plaatje']['name'];
+    $target = "images/images_user/".basename($image);
+    move_uploaded_file($_FILES['plaatje']['tmp_name'], $target);
 
-    $sql = "INSERT INTO weetjesdb (weetjes, gebruiker, geb_datum, plaatje, titel) VALUES ('$weetje','$gebruiker','$datum','$plaatje','$titel')";
+    $sql = "INSERT INTO weetjesdb (weetjes, gebruiker, geb_datum, plaatje) VALUES ('$weetje','$gebruiker','$datum','$image')";
 
     if (mysqli_query($conn, $sql)) {
 
-        if (isset($_SESSION["geplaatst"])) {
-            $_SESSION["geplaatst"] = $_SESSION["geplaatst"] + 1;
-            $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
-        } else {
-            $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
-            $_SESSION["oudTijd"] = explode("-",date("i-h-d"));
-            $_SESSION["geplaatst"] = 0;
+        // if (isset($_SESSION["geplaatst"])) {
+        //     $_SESSION["geplaatst"] = $_SESSION["geplaatst"] + 1;
+        //     $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
+        // } else {
+        //     $_SESSION["nieuwTijd"] = explode("-",date("i-h-d"));
+        //     $_SESSION["oudTijd"] = explode("-",date("i-h-d"));
+        //     $_SESSION["geplaatst"] = 0;
 
-        }
+        // }
     }
 }
 
