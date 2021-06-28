@@ -77,10 +77,7 @@
         }
         // ^^^^^ Cookie functies om cookies te maken ^^^^^
 
-
-
-
-
+// Checkt voor overflow
 function checkOverflow(el)
 {
     var curOverflow = el.style.overflow;
@@ -96,6 +93,7 @@ function checkOverflow(el)
     return isOverflowing;
 }
 
+// Checkt voor errors en voegt juiste classes toe
 function errorr(error, text) {
     console.log(text)
     console.log(error)
@@ -107,6 +105,7 @@ function errorr(error, text) {
     }
 }
 
+// Een feitje verwijderen
 function kill() {
 
     let verwijder=confirm("weet je zeker dat je dit weetje wilt verwijderen?");
@@ -118,14 +117,18 @@ function kill() {
     }
 }
 
-function plaatje_weetje(extent){
+// Openklappen feitje bij overflow
+function openWeetje(extent,btnid){
     console.log(extent);
     let ding = document.getElementById(extent);
+    let dingdong = document.getElementById(btnid);
     if(ding.style.height=='100%'){
         ding.style.height="200px";
+        dingdong.innerHTML="▼";
     }else{
         ding.style.height="100%";
-
+        dingdong.innerHTML="▲";
     }
     
 }
+

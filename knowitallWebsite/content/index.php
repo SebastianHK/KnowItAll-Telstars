@@ -196,20 +196,7 @@ if ($conn -> connect_errno) {
             new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
             //stuur();
         }
-        /*$huidigPage = 0;
-        if (isset($_POST["limit"])) {
-            //echo '<h1>'.$_POST["limit"].'</h1>';
-            $huidigPage = $_POST["limitPage"];
-            //echo '<h1>'.$_POST["limitPage"].'</h1>';
-            $offset = $huidigPage*15;
-            if ($huidigPage < 0) {
-                $huidigPage = 1;
-            }
-            $sqs = "SELECT * FROM `weetjesDB` WHERE gebruiker='$gebruiker' LIMIT 15 OFFSET $offset";
-            echo $sqs;
-        }*/
-
-
+        // Weetje plaatsen op de website
         $result = $conn->query($sqs);
         $numRows = $conn->query("SELECT COUNT(id) FROM weetjesdb WHERE gebruiker='$gebruiker'");
 
@@ -246,10 +233,9 @@ if ($conn -> connect_errno) {
                         </div>
                            <hr>
                            <p class='weetje'>". $row['weetjes']."</p>
-                           <button class='op-btn' onclick='plaatje_weetje(this.parentElement.id)'>meer...</button>
-                           <div class ='extent'>
-                           <img src='images/images_user/".$row['plaatje']."'>
-                            </div>
+                           <button id='op-btn-$i' class='op-btn' onclick='openWeetje(this.parentElement.id,this.id)'>▼</button>
+                           <div class ='extent'>".( $row['plaatje'] != null ? "<img src='images/images_user/".$row['plaatje']."'>" : "")."
+                        </div>
                           
                     </div>";
                 $i++;
@@ -289,28 +275,21 @@ if ($conn -> connect_errno) {
 
         }
 
-        //echo '<pre>' . var_export($weetjesArr, true) . '</pre>';
-
         //om rows te verwijderen
         if (isset($_POST["verwijder"])) {
 
             $ID = $_POST["ID"];
-
 
             if(strtolower($_SESSION["gebruikersnaam"]) == strtolower($_POST["gebruikersnaam"]) && in_array('weetje.'.$_POST["ID"], $weetjesArr) || $_SESSION["rank"] == 'admin') {
                 $ID = $_POST["ID"];
                 $sql = "DELETE FROM weetjesdb WHERE ID='$ID'";
                 if (mysqli_query($conn, $sql)) {
                     echo '<script>errorr(false, "Weetje '.$ID.' is succesvol verwijderd.")</script>';
-
-
-
                 } else {
                     echo '<script>errorr(true, "Er ging iets fout bij het verwijderen van weetje '.$ID.'.")</script>';
                 }
             } else {
                 echo '<script>errorr(true, "Je mag weetje '.$ID.' niet verwijderen.")</script>';
-
             }
 
         }

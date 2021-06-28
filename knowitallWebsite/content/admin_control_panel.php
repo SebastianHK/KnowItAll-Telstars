@@ -306,9 +306,8 @@ $numRows = $numRows['COUNT(id)'];
                         </div>
                            <hr>
                            <p class='weetje'>". $row['weetjes']."</p>
-                           <button onclick='plaatje_weetje(this.parentElement.id)' class='op-btn'>meer...</button>
-                          <div class='extent'>
-                          <img src='images/images_user/".$row['plaatje']."'>
+                           <button id='op-btn-$c' class='op-btn' onclick='openWeetje(this.parentElement.id,this.id)'>▼</button>
+                          <div class ='extent'>".( $row['plaatje'] != null ? "<img src='images/images_user/".$row['plaatje']."'>" : "")."
                            </div>
                     </div>";
                 $c++;
@@ -345,7 +344,7 @@ $numRows = $numRows['COUNT(id)'];
             if ($huidigPage <=! $numRows/15) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
-                        <input class='limitKnop huidig' type='submit' value='>'>
+                        <input class='limitKnop huidig' type='submit' value='❯'>
                   </form>";
             }
 

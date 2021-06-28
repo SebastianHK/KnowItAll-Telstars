@@ -205,9 +205,8 @@ if ($conn -> connect_errno) {
                         </div>
                         <hr>
                         <p class='weetje'>". $row['weetjes']."</p>
-                        <button onclick='plaatje_weetje(this.parentElement.id)' class='op-btn'>meer...</button>
-                       <div class='extent'>
-                       <img src='images/images_user/".$row['plaatje']."'>
+                        <button id='op-btn-$i' class='op-btn' onclick='openWeetje(this.parentElement.id,this.id)'>▼</button>
+                       <div class ='extent'>".( $row['plaatje'] != null ? "<img src='images/images_user/".$row['plaatje']."'>" : "")."
                         </div>
                  </div>";
              $i++;

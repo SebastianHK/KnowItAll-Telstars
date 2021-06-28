@@ -418,7 +418,6 @@ main {
 }
 
 .weetjeDiv {
-    box-shadow: inset 0 -3px 1px gray;
     position: relative;
     overflow: hidden;
     background-color: white;
@@ -426,7 +425,7 @@ main {
     padding: 20px;
     border-radius: 20px;
     margin-top: 10px;
-    height: 200px;
+    min-height: 150px;
 }
 .weetjeDiv img {
     height: auto;
@@ -434,7 +433,7 @@ main {
 }
 .weetjeInfo {
     display: flex;
-
+    min-height: 0;
     justify-content: space-between;
 }
 /* .weetje {
@@ -538,9 +537,10 @@ pre:before {
 /* limitBar styles */
 
 .limitBar {
-    gap: 3px;
+    gap: 5px;
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
 }
 
 .limitKnop {
@@ -688,9 +688,13 @@ pre:before {
 }
 
 .op-btn{
-    position:relative;
-    height: auto;
-    margin-bottom: 130px;
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    background: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
 
 }
 
