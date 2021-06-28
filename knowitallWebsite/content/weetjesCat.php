@@ -236,7 +236,7 @@ if ($conn -> connect_errno) {
                         <input class='limitKnop $c' type='submit' value='$s'>
                       </form>";
             }
-            if ($huidigPage <=! $numRows/15+1) {
+            if ($huidigPage <=! $numRows/15+1 && $numRows/15 <=! 1) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
                         <input class='limitKnop huidig' type='submit' value='❯'>
