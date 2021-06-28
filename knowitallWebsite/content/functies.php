@@ -3,7 +3,7 @@
 //unset($_SESSION["geplaatst"]);
 //unset($_SESSION["oudTijd"]);
 //unset($_SESSION["nieuwTijd"]);
-/*function stuur()
+function stuur()
 {
     global $gebruiker, $conn;
     // if (isset($_SESSION["geplaatst"])) {
@@ -27,11 +27,12 @@
 
     $weetje = htmlspecialchars($_POST["weetje"]);
     $datum = htmlspecialchars($_POST["datum"]);
+    $titel = htmlspecialchars($_POST["titel"]);
     $image = $_FILES['plaatje']['name'];
     $target = "images/images_user/".basename($image);
     move_uploaded_file($_FILES['plaatje']['tmp_name'], $target);
 
-    $sql = "INSERT INTO weetjesdb (weetjes, gebruiker, geb_datum, plaatje) VALUES ('$weetje','$gebruiker','$datum','$image')";
+    $sql = "INSERT INTO weetjesdb (weetjes, titel, gebruiker, geb_datum, plaatje) VALUES ('$weetje', '$titel','$gebruiker','$datum','$image')";
 
     if (mysqli_query($conn, $sql)) {
 
@@ -45,7 +46,7 @@
 
         // }
     }
-}*/
+}
 
 function delZSession() {
     unset($_SESSION["pGebruikersnaam"]);
