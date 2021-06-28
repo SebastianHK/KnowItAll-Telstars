@@ -95,7 +95,7 @@ $conn->close();
     </div>
     <a class="titel navKnop" href="index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="content/weetjesCat.php" class="navKnop headerNavKnop">Weetjes Catalogus</a>
+        <a href="content/weetjesCat.php" class="navKnop headerNavKnop">Weetjes catalogus</a>
     </div>
 
         <?php  if ($gebruikersnaam == 'gast') : ?>

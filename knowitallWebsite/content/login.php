@@ -8,7 +8,7 @@
     <title>KnowItAll</title>
     <link rel="stylesheet" href="mainStyles.css">
     <link rel="icon" href="" type="image/icon type">
-    <link rel="icon" href="content/images/alleen_doos_logo.png" type="image/icon type">
+    <link rel="icon" href="images/alleen_doos_logo.png" type="image/icon type">
     
 </head>
     <div id="xboxAchtergrond" class="xboxStyle achtergrond" style="opacity: 0;"></div>

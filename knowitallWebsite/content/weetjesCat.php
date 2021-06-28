@@ -69,14 +69,14 @@ if ($conn -> connect_errno) {
     </div>
     <a class="titel navKnop" href="../index.php">TheKnowItAll</a>
     <div class="navKnoppen">
-        <a href="" class="navKnop headerNavKnop">weetjes catalogus</a>
+        <a href="" class="navKnop headerNavKnop">Weetjes catalogus</a>
         <?php  if ($gebruikersnaam !== 'gast') : ?>
-            <a href="index.php?logout='1'" class="navKnop logKnop">uitloggen</a>
-            <a href="index.php" class="navKnop headerNavKnop">profiel</a>
-            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">voeg weetje toe</a>
+            <a href="index.php?logout='1'" class="navKnop logKnop">Uitloggen</a>
+            <a href="index.php" class="navKnop headerNavKnop">Profiel</a>
+            <a class="navKnop headerNavKnop" onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
         <?php endif ?>
         <?php  if ($gebruikersnaam == 'gast') : ?>
-            <a href="index.php" class="navKnop logKnop">login/registreer</a>
+            <a href="index.php" class="navKnop logKnop">Login/Registreer</a>
         <?php endif ?>
         <?php  if ($rank == 'admin') : ?>
             <a href="admin_control_panel.php" class="navKnop headerNavKnop" id="adminCPK">Admin control panel</a>
@@ -102,14 +102,14 @@ if ($conn -> connect_errno) {
 
     <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
-        <input type="text" required name="titel" id="titel" placeholder="titel" maxlength="50"></input><br>
-        <textarea required name="weetje" id="weetje" placeholder="weetje" maxlength="400"></textarea><br>
-        <p>datum van gebeurd</p>
+        <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
+        <textarea required name="weetje" id="weetje" placeholder="Weetje" maxlength="400"></textarea><br>
+        <p>Datum van gebeurtenis</p>
         <input name="datum" type="date">
         <div id="fileInputContainer">
             <input hidden id="fileInput" name="plaatje" type="file" name="image" /><br>
             <label id="fileInputLabel" for="fileInput">Bladeren...</label>
-            <span id="file-chosen">Geen file gekozen</span>
+            <span id="file-chosen">Geen bestand gekozen</span>
         </div>
         <input class="submitKnop" type="submit" name="submit" value="VERSTUUR">
     </form>
@@ -117,12 +117,12 @@ if ($conn -> connect_errno) {
         <form id="zoekCentrum" action="" method="post">
             <label for="sorteer">Sorteer</label>
             <label></label>
-            <label for="gebDatum">datum gebeurd</label>
+            <label for="gebDatum">Datum gebeurtenis</label>
 
 
             <select id="sorteerInput" class="zoekInput" name="sorteer">
-                <option id="plaats_datum" value="plaats_datum">Date Geplaatst</option>
-                <option id="geb_datum" value="geb_datum">Date ingevoerd</option>
+                <option id="plaats_datum" value="plaats_datum">Datum geplaatst</option>
+                <option id="geb_datum" value="geb_datum">Datum gebeurtenis</option>
                 <option id="status" value="status">Status</option>
                 <option id="gebruikersnaam" value="gebruikersnaam">Gebruikersnaam</option>
             </select>
@@ -133,8 +133,8 @@ if ($conn -> connect_errno) {
             </select>
             <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
 
-            <input type="reset" value="reset">
-            <input type="submit" value="zoek" name="zoek" class="zoekInput">
+            <input type="reset" value="Reset">
+            <input type="submit" value="Zoek" name="zoek" class="zoekInput">
         </form>
         <script>
             <?php
@@ -147,21 +147,18 @@ if ($conn -> connect_errno) {
             ?>
         </script>
         <div style="height: 100%;" class="weetjeDiv weetjeInfo">
-            <p class="tooltip">ID
-                <span class="tooltiptext">ID van het weetje</span>
+            <p class="tooltip">Titel
+                <span class="tooltiptext">Titel van het weetje.</span>
             </p> -
-            <p class="tooltip">titel
-                <span class="tooltiptext">titel van het weetje</span>
+            <p class="tooltip">Datum geplaatst
+                <span class="tooltiptext">Datum dat het weetje geplaatst is.</span>
             </p> -
-            <p class="tooltip">plaats datum
-                <span class="tooltiptext">Datum dat het weetje geplaatst is</span>
+            <p class="tooltip">Datum gebeurtenis
+                <span class="tooltiptext">De datum die de gebruiker heeft ingevoerd van wanneer het weetje gebeurt is.</span>
             </p> -
-            <p class="tooltip">ingevoerde datum
-                <span class="tooltiptext">Datum dat de gebruiker heeft ingevoerd van wanneer het gebeurt is</span>
-            </p> -
-            <p class="tooltip">status
-                <span class="tooltiptext">Satus van het weetje</span>
-            </p> -
+            <p class="tooltip">Status
+                <span class="tooltiptext">Satus van het weetje.</span>
+            </p>
         </div>
         <?php
         include 'functies.php';
@@ -205,7 +202,7 @@ if ($conn -> connect_errno) {
 
                 echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
                         </div>
                         <hr>
                         <p class='weetje'>". $row['weetjes']."</p>
