@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -126,8 +125,7 @@ $conn->close();
             </div>
             
             <div class="grootBox">
-                
-                <p>Welkom op de KnowItAll website. Meer informatie volgt</p>
+                <p>Welkom op de KnowItAll website. De KnowItAll is een online database volledig gefocussed op jawel, video games! Op deze website kan je je eigen leuke feitjes toevoegen, met afbeelding. </p>
             </div>
         </div>
 
