@@ -138,8 +138,8 @@ if ($conn -> connect_errno) {
             </select>
 
             <select id="ascDescInput" class="ascDesc zoekInput" name="ascDesc">
-                <option id="ASC" value="ASC">ASC</option>
-                <option id="DESC" value="DESC">DESC</option>
+                <option id="ASC" value="ASC">Oplopend</option>
+                <option id="DESC" value="DESC">Aflopend</option>
             </select>
             <input class="zoekInput" type="date" name="gebDatum" id="gebDatum">
 
