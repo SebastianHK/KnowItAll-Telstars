@@ -20,7 +20,11 @@ if (isset($_POST['reg_gebruiker'])) {
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
     if (empty($gebruikersnaam)) { array_push($errors, "Gebruikersnaam is verplicht"); }
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     if (empty($email)) { array_push($errors, "Email is verplicht"); }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Email niet geldig");
+    }
     if (empty($wachtwoord_1)) { array_push($errors, "Wachtwoord is verplicht"); }
     if ($wachtwoord_1 != $wachtwoord_2) {
         array_push($errors, "De twee wachtwoorden komen niet overeen");
@@ -93,15 +97,20 @@ if (isset($_POST['login_gebruiker'])) {
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
             $result = mysqli_fetch_assoc($results);
-            if(password_verify($wachtwoord, $result['wachtwoord'])) {
-                $_SESSION['gebruikersnaam'] = $gebruikersnaam;
-                $_SESSION['success'] = "Je bent succesvol ingelogd!";
-                $_SESSION['rank'] = $result['rank'];
+            if ($results['verified'] === 0) {
+                if(password_verify($wachtwoord, $result['wachtwoord'])) {
+                    $_SESSION['gebruikersnaam'] = $gebruikersnaam;
+                    $_SESSION['success'] = "Je bent succesvol ingelogd!";
+                    $_SESSION['rank'] = $result['rank'];
 
-                header('location: index.php');
-            }else {
-                array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
+                    header('location: index.php');
+                }else {
+                    array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
+                }
+            } else {
+                array_push($errors, "Verifieer je account aub");
             }
+
 
         }else {
             array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");

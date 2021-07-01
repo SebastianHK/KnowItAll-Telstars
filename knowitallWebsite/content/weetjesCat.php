@@ -174,7 +174,12 @@ if ($conn -> connect_errno) {
 
         $gebruiker = $gebruikersnaam;
         if(isset($_POST["submit"])) {
-            new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
+            $image = $_FILES['plaatje']['name'];
+            if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker,$conn)) {
+                $target = "images/images_user/".basename($image);
+                move_uploaded_file($image['plaatje']['tmp_name'], $target);
+            }
+
             //stuur();
         }
         $huidigPage = 0;
