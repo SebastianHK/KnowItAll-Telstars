@@ -3,7 +3,7 @@
 //unset($_SESSION["geplaatst"]);
 //unset($_SESSION["oudTijd"]);
 //unset($_SESSION["nieuwTijd"]);
-/*function stuur()
+function stuur()
 {
     global $gebruiker, $conn;
     // if (isset($_SESSION["geplaatst"])) {
@@ -46,7 +46,7 @@
 
         // }
     }
-}*/
+}
 
 function delZSession() {
     unset($_SESSION["pGebruikersnaam"]);
