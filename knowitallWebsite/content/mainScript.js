@@ -78,25 +78,24 @@
         // ^^^^^ Cookie functies om cookies te maken ^^^^^
 
 // Checkt voor overflow
+
 function checkOverflow(el)
 {
-    var curOverflow = el.style.overflow;
+    let curOverflow = el.style.overflow;
 
-    if ( !curOverflow || curOverflow === "visible" )
+    if ( !curOverflow || curOverflow === "scroll" )
         el.style.overflow = "hidden";
 
-    var isOverflowing = el.clientWidth < el.scrollWidth
+    let isOverflowing = el.clientWidth < el.scrollWidth
         || el.clientHeight < el.scrollHeight;
 
     el.style.overflow = curOverflow;
-
+    console.log(isOverflowing)
     return isOverflowing;
 }
 
 // Checkt voor errors en voegt juiste classes toe
 function errorr(error, text) {
-    console.log(text)
-    console.log(error)
     if (error == true) {
         document.getElementById('errorDiv').classList.remove('success');
         document.getElementById('errorText').innerHTML = text;
@@ -119,11 +118,10 @@ function kill() {
 
 // Openklappen feitje bij overflow
 function openWeetje(extent,btnid){
-    console.log(extent);
     let ding = document.getElementById(extent);
     let dingdong = document.getElementById(btnid);
     if(ding.style.height=='100%'){
-        ding.style.height="200px";
+        ding.style.height="150px";
         dingdong.innerHTML="▼";
     }else{
         ding.style.height="100%";
