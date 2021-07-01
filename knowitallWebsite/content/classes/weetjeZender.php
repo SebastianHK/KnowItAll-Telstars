@@ -16,6 +16,13 @@ class zendWeetje {
         $this->plaatje = $plaatje;
         $this->conn = $conn;
 
+        $query = "SELECT * FROM gebruikers WHERE gebruiker='$gebruiker'";
+        $results = mysqli_query($conn, $query);
+        if (mysqli_num_rows($results) == 1) {
+            $result = mysqli_fetch_assoc($results);
+            $email = $result['email'];
+        }
+
         $sql = "INSERT INTO weetjesdb (titel, weetjes, gebruiker, geb_datum, plaatje) VALUES ('$titel','$inhoud','$gebruiker','$ingDatum','$plaatje')";
         mysqli_query($conn, $sql);
     }
