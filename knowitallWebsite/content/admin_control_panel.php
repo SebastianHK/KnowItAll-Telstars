@@ -81,7 +81,7 @@ if ($result->num_rows > 0) {
 $gebruiker = $_SESSION['gebruikersnaam'];
 if(isset($_POST["submit"])) {
     $image = $_FILES['plaatje']['name'];
-    if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker,$conn)) {
+    if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker)) {
         $target = "images/images_user/".basename($image);
         move_uploaded_file($image['plaatje']['tmp_name'], $target);
     }    //stuur();

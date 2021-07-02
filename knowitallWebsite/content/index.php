@@ -48,7 +48,7 @@ if ($conn -> connect_errno) {
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <script src="mainScript.js"></script>
+
 
     <meta http-equiv="Content-Type"content="text/html;charset=UTF-8">
     <meta name="viewport"
@@ -96,14 +96,14 @@ if ($conn -> connect_errno) {
             </h3>
         </div>
     <?php endif ?>
-    <?php if (isset($_POST['verwijder'])) : ?>
+    <?php if (isset($_POST['verwijder']) || isset($_POST['submit'])): ?>
         <div id="errorDiv" class="error success" >
             <h3 id="errorText">
 
             </h3>
         </div>
     <?php endif ?>
-
+    <script src="mainScript.js"></script>
     <?php if (isset($_SESSION['gebruikersnaam'])) : ?>
 
         <p class="titelText">Welkom op jou profiel pagina, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
@@ -179,7 +179,7 @@ if ($conn -> connect_errno) {
         <p class="tooltip">Status
             <span class="tooltiptext">Satus van het weetje.</span>
         </p> -
-        <p class="tooltip">Verwijder
+        <p class="tooltip">Verwijderrrr
             <span class="tooltiptext">Verwijdert een weetje.</span>
         </p>
     </div>
@@ -189,10 +189,11 @@ if ($conn -> connect_errno) {
         $gebruiker = $_SESSION['gebruikersnaam'];
         if(isset($_POST["submit"])) {
             $image = $_FILES['plaatje']['name'];
-            if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker,$conn)) {
+            if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker)) {
                 $target = "images/images_user/".basename($image);
                 move_uploaded_file($_FILES['plaatje']['tmp_name'], $target);
-            }            //stuur();
+
+            }
         }
         // Weetje plaatsen op de website
         $result = $conn->query($sqs);

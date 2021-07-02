@@ -98,7 +98,7 @@ if (isset($_POST['login_gebruiker'])) {
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
             $result = mysqli_fetch_assoc($results);
-            if ($results['verified'] === 0) {
+            if (/*$results['verified']*/0 === 0) {
                 if(password_verify($wachtwoord, $result['wachtwoord'])) {
                     $_SESSION['gebruikersnaam'] = $gebruikersnaam;
                     $_SESSION['success'] = "Je bent succesvol ingelogd!";
