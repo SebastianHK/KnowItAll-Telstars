@@ -118,14 +118,14 @@ if ($conn -> connect_errno) {
 
         <p class="titelText">Welkom op jou profiel pagina, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
 
-        <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
+        <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php" enctype="multipart/form-data">
             <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
-            <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
+            <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"><br>
             <textarea required name="weetje" id="weetje" placeholder="Weetje" maxlength="400"></textarea><br>
             <p>Datum van gebeurtenis</p>
             <input name="datum" type="date">
             <div id="fileInputContainer">
-                <input hidden id="fileInput" name="plaatje" type="file" name="plaatje" /><br>
+                <input hidden id="fileInput" name="plaatje" type="file"/><br>
                 <label id="fileInputLabel" for="fileInput">Bladeren...</label>
                 <span id="file-chosen">Geen bestand gekozen</span>
             </div>
@@ -173,7 +173,7 @@ if ($conn -> connect_errno) {
 
         ?>
     </script>
-    <div style="height: 100%;" class="weetjeDiv weetjeInfo">
+    <div style="height: 100%; overflow: hidden;" class="weetjeDiv weetjeInfo">
         <p class="tooltip">ID
             <span class="tooltiptext">ID van het weetje.</span>
         </p> -
@@ -198,8 +198,11 @@ if ($conn -> connect_errno) {
 
         $gebruiker = $_SESSION['gebruikersnaam'];
         if(isset($_POST["submit"])) {
-            new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),htmlspecialchars($_POST["plaatje"]),$gebruiker,$conn);
-            //stuur();
+            $image = $_FILES['plaatje']['name'];
+            if (new zendWeetje(htmlspecialchars($_POST["titel"]),htmlspecialchars($_POST["weetje"]),htmlspecialchars($_POST["datum"]),$image,$gebruiker,$conn)) {
+                $target = "images/images_user/".basename($image);
+                move_uploaded_file($_FILES['plaatje']['tmp_name'], $target);
+            }            //stuur();
         }
         // Weetje plaatsen op de website
         $result = $conn->query($sqs);
@@ -269,7 +272,7 @@ if ($conn -> connect_errno) {
                       </form>";
             }
 
-            if ($huidigPage <=! $numRows/15 && $numRows/15 <=! 1) {
+            if ($huidigPage <=! $numRows/15 || $numRows/15 <=! 1) {
                 echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
                         <input class='limitKnop huidig' type='submit' value='❯'>
@@ -320,6 +323,20 @@ if ($conn -> connect_errno) {
     actualBtn.addEventListener('change', function(){
         fileChosen.textContent = this.files[0].name
     })
+/*
+    let w = document.getElementsByClassName("weetjeDiv");
+
+    Array.prototype.forEach.call(w, function(el) {
+        console.log(el);
+        if (el.scrollHeight > el.offsetHeight) {
+            console.log("JA")
+        }
+        if (checkOverflow(el)) {
+            let btn = el.querySelectorAll(".op-btn");
+            console.log(btn);
+        }
+    });
+*/
 
 </script>
 
