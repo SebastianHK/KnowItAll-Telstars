@@ -21,15 +21,15 @@
 //error_reporting(E_ALL);
 
 
-//$localhost = "localhost"; #localhost
-//$dbusername = "student4a0_558674"; #username of phpmyadmin
-//$dbpassword = "kryX8I";  #password of phpmyadmin
-//$dbname = "student4a0_558674";  #database name
-//
 $localhost = "localhost"; #localhost
-$dbusername = "root"; #username of phpmyadmin
-$dbpassword = "";  #password of phpmyadmin
-$dbname = "knowitall";  #database name
+$dbusername = "student4a0_558674"; #username of phpmyadmin
+$dbpassword = "kryX8I";  #password of phpmyadmin
+$dbname = "student4a0_558674";  #database name
+
+//$localhost = "localhost"; #localhost
+//$dbusername = "root"; #username of phpmyadmin
+//$dbpassword = "";  #password of phpmyadmin
+//$dbname = "knowitall";  #database name
 
 $conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
 if ($conn -> connect_errno) {
@@ -42,16 +42,22 @@ setlocale(LC_TIME, array('nl_NL.UTF-8','nl_NL@euro','nl_NL','dutch'));
 
 
 $weetjes = array();
+
 $vandaag = date("d-m-Y");
 
 $sqs = "SELECT * FROM weetjesDB WHERE geb_datum='$vandaag'";
 
-$result = $conn->query($sqs);
 
+$result = $conn->query($sqs);
+$i = 0;
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         if ($row['status'] == 'goedgekeurd') {
-            array_push($weetjes,$row["weetjes"]);
+            $weetjes[$i]["gebruiker"] = $row["gebruiker"];
+            $weetjes[$i]["titel"] = $row["titel"];
+            $weetjes[$i]["weetjes"] = $row["weetjes"];
+            $weetjes[$i]["plaatje"] = $row["plaatje"];
+            $i++;
         }
 
 
@@ -59,6 +65,10 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+
+$vWeetjes = $weetjes[mt_rand(0, count($weetjes)-1)];
+
+print("<pre>".print_r($weetjes,true)."</pre>");
 session_start();
 // sessions voor de zoekbalk
 if (isset($_SESSION["pSorteer"])) {
@@ -121,14 +131,15 @@ $conn->close();
 
     <main>
         <div id="labels">
-            <label>Feitje van <?php echo strftime("%A %d %B") ?>:</label>
+            <label>Feitje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br><?php echo $vWeetjes["titel"] ?></label>
             <label>Informatie over de KnowItAll:</label>
         </div>
         <div id="boxen">
             
             <div class="grootBox">
                 <?php
-                echo '<p>'. $weetjes[mt_rand(0, count($weetjes)-1)] .'</p>';
+                echo '<p>'. $vWeetjes["weetjes"] .'</p>';
+                echo ( $vWeetjes['plaatje'] != null ? "<img src='content/images/images_user/".$vWeetjes['plaatje']."'>" : "");
                 ?>
             </div>
             

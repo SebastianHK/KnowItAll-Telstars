@@ -7,9 +7,9 @@ $email    = "";
 $errors = array();
 
 // connect to the database
-//$db = mysqli_connect('localhost', 'student4a0_558674', 'kryX8I', 'student4a0_558674');
+$db = mysqli_connect('localhost', 'student4a0_558674', 'kryX8I', 'student4a0_558674');
 
-$db = mysqli_connect('localhost', 'root', '', 'knowitall');
+//$db = mysqli_connect('localhost', 'root', '', 'knowitall');
 
 // REGISTER USER
 if (isset($_POST['reg_gebruiker'])) {

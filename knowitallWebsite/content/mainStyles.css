@@ -255,7 +255,19 @@ main {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.74);
     box-shadow: 3px 3px rgba(37, 37, 37, 0.493);
-    
+
+}
+.grootBox:nth-child(1) {
+    width: 25rem;
+    height: max-content;
+    min-height: 13rem;
+    max-height: 34rem;
+    position: relative;
+    margin-bottom: 50px;
+}
+.grootBox p {
+    width: 100%;
+    word-wrap: break-word;
 }
 #labels label {
     position: relative;
@@ -724,9 +736,12 @@ pre:before {
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
+
+
 @media only screen and (max-width: 768px) {
     /* Voor telefoons: */
     [class*="col-"] {
       width: 100%;
     }
   }
+
