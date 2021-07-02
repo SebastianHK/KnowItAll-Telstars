@@ -170,7 +170,7 @@ $numRows = $numRows['COUNT(id)'];
 
     <p class="titelText">Welkom op de Admin Control Panel, <strong class="titelText"><?php echo $_SESSION['gebruikersnaam']; ?></strong></p>
 
-    <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
+    <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php" enctype="multipart/form-data">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
         <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
         <textarea required name="weetje" id="weetje" placeholder="Weetje" maxlength="400"></textarea><br>

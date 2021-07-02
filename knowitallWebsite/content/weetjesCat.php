@@ -116,7 +116,7 @@ if ($conn -> connect_errno) {
 
     <p class="titelText">Welkom bij de weetjes catalogus, <strong class="titelText"><?php echo $gebruikersnaam; ?></strong></p>
 
-    <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php">
+    <form style="display: none;" method="POST" id="weetjeStuurder" action="index.php" enctype="multipart/form-data">
         <div onclick="document.getElementById('weetjeStuurder').style.display = 'none'" id="wegKnopWeetjeStuurder">x</div>
         <input type="text" required name="titel" id="titel" placeholder="Titel" maxlength="50"></input><br>
         <textarea required name="weetje" id="weetje" placeholder="Weetje" maxlength="400"></textarea><br>
