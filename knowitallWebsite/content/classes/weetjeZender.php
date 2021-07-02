@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__).'/../connectie.php';
+
 class zendWeetje {
     public $titel;
     public $inhoud;
@@ -10,7 +10,7 @@ class zendWeetje {
     public function __construct($titel, $inhoud, $ingDatum, $image, $gebruiker)
     {
 
-
+        require dirname(__FILE__).'/../connectie.php';
         $this->titel = $titel;
         $this->inhoud = $inhoud;
         $this->gebruiker = $gebruiker;
@@ -21,7 +21,6 @@ class zendWeetje {
             $ingDatum = '0000-00-00';
         }
         $sql = "INSERT INTO weetjesdb (titel, weetjes, gebruiker, geb_datum, plaatje) VALUES ('$titel','$inhoud','$gebruiker','$ingDatum','$image')";
-        echo $sql;
         if (mysqli_query($conn, $sql)) {
             if (sendMail($aMail, 'Nieuw weetje toegevoegd', '
 <h1>Er is een nieuw weetje toegevoed.</h1>
