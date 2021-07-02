@@ -1,11 +1,12 @@
 <?php
 session_start();
-
+require "classes/mail.php";
 // initializing variables
 $gebruikersnaam = "";
 $email    = "";
 $errors = array();
 require 'connectie.php';
+require 'functies.php';
 // connect to the database
 
 //$db = mysqli_connect('localhost', 'root', '', 'knowitall');
@@ -65,20 +66,29 @@ if (isset($_POST['reg_gebruiker'])) {
             array_push($errors, "Deze email word al gebruikt");
         }
     }
-
+    echo "test1";
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
+        echo "test1";
         $wachtwoord = password_hash($wachtwoord_1,PASSWORD_DEFAULT);//encrypt the password before saving in the database
 
         $query = "INSERT INTO gebruikers (gebruiker, email, wachtwoord) 
   			  VALUES('$gebruikersnaam', '$email', '$wachtwoord')";
-        mysqli_query($db, $query);
-        $_SESSION['$gebruikersnaam'] = $gebruikersnaam;
-        $_SESSION['success'] = "Je bent succesvol ingelogd!";
-        header('location: index.php');
+        if (mysqli_query($db, $query)) {
+            verifyEmail($gebruikersnaam, $email);
+        } else {
+            echo '<script>errorr(true, "Er ging iets fout bij het maken van het account")</script>';
+
+        }
+
+
+
     }
 }
 
+if (isset($_POST["verifyEmail"])) {
+    verifyEmail($_POST["gebruikersnaam"], $_POST['email']);
+}
 
 // LOGIN USER
 if (isset($_POST['login_gebruiker'])) {
@@ -93,27 +103,23 @@ if (isset($_POST['login_gebruiker'])) {
     }
 
     if (count($errors) == 0) {
-//        $wachtwoordHash = password_hash($wachtwoord);
         $query = "SELECT * FROM gebruikers WHERE gebruiker='$gebruikersnaam'";
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
             $result = mysqli_fetch_assoc($results);
-            if (/*$results['verified']*/0 === 0) {
-                if(password_verify($wachtwoord, $result['wachtwoord'])) {
-                    $_SESSION['gebruikersnaam'] = $gebruikersnaam;
-                    $_SESSION['success'] = "Je bent succesvol ingelogd!";
-                    $_SESSION['rank'] = $result['rank'];
-
-                    header('location: index.php');
-                }else {
-                    array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
+            if(password_verify($wachtwoord, $result['wachtwoord'])) {
+                if ($result['verified'] == 1) {
+                        $_SESSION['gebruikersnaam'] = $gebruikersnaam;
+                        $_SESSION['success'] = "Je bent succesvol ingelogd!";
+                        $_SESSION['rank'] = $result['rank'];
+                        header('location: index.php');
+                } else {
+                    array_push($errors, "Verifieer je email aub. <form method='post' action=''><input type='hidden' name='gebruikersnaam' value='$gebruikersnaam'><input type='hidden' name='email' value='".$result["email"]."'><input type='submit' name='verifyEmail' value='Stuur email opnieuw'></form>");
                 }
             } else {
-                array_push($errors, "Verifieer je account aub");
+                array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
             }
-
-
-        }else {
+        } else {
             array_push($errors, "Verkeerde gebruikersnaam/wachtwoord combinatie");
         }
     }

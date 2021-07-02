@@ -96,6 +96,7 @@ function checkOverflow(el)
 
 // Checkt voor errors en voegt juiste classes toe
 function errorr(error, text) {
+    document.getElementById('errorDiv').style.display = "block";
     if (error == true) {
         document.getElementById('errorDiv').classList.remove('success');
         document.getElementById('errorText').innerHTML = text;

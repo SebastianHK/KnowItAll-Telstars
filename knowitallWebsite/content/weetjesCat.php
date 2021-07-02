@@ -216,7 +216,7 @@ if ($conn -> connect_errno) {
          }
 
         } else {
-            echo "<div class='error'><p>Je hebt nog geen weetjes</p></div>";
+            echo "<div class='error'><p>Geen weetjes gevonden</p></div>";
         }
 
         if (count($weetjesArr) > 0) {

@@ -2,7 +2,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+require_once 'classes/mail.php';
+require_once 'connectie.php';
+$errors = [];
 //function om bericht te sturen
 //unset($_SESSION["geplaatst"]);
 //unset($_SESSION["oudTijd"]);
@@ -369,4 +371,41 @@ function numRowsQuery() {
         }
     }
     return $numQueryString;
+}
+
+function verifyEmail($gebruiker, $email) {
+    global $errors;
+    if (isset($_SESSION["emailVerify"])) {
+        global $conn;
+
+        $hash = md5(rand(0,1000));
+        $q = "UPDATE gebruikers SET hash='$hash' WHERE gebruiker='$gebruiker'";
+
+        mysqli_query($conn, $q);
+        if (
+        sendMail($email, 'Verifieer je email bij de KnowitAll', '
+            <h1>Verifieer je email.</h1>
+            <h2>'.$gebruiker.'</h2>
+            <h2>'.$email.'</h2>
+            <hr>
+            <div>
+                <h2>Klik op de onderste link om je email te registreren.</h2>
+                <p>http://554619.student4a0.ao-ica.nl/knowitallWebsite/content/verify.php?email='.$email.'&hash='.$hash.'</p>
+            
+            </div>
+
+    
+    ', 'KnowItAll<558674@edu.rocmn.nl>' ))
+        {
+            $_SESSION["emailVerify"] = true;
+            $_SESSION["success"] = "We hebben een verificatie email naar je gestuurd. Als je deze niet kan vinden zit hij waarschijnlijk in je spam folder.";
+        } else {
+            array_push($errors, "Er ging iets fout bij het sturen van de verificatie mail");
+        }
+    } else {
+        array_push($errors, "Er is al een verificatie email naar je gestuurd.");
+
+    }
+
+
 }

@@ -1,3 +1,4 @@
+<script src="mainScript.js"></script>
 <?php include('server.php') ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -31,6 +32,17 @@
     </header>
 
     <main>
+
+        <?php if (isset($_SESSION['success'])) : ?>
+            <div class="error success">
+                <h3>
+                    <?php
+                    echo $_SESSION['success'];
+                    unset($_SESSION['success']);
+                    ?>
+                </h3>
+            </div>
+        <?php endif ?>
         <?php include('errors.php'); ?>
         <form class="registratieContainer" method="post" action="login.php">
             <h1>Inloggen</h1>

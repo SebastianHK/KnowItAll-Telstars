@@ -233,7 +233,7 @@ main {
     width: 100%;
     height: calc(100vh - 80px);
     justify-content: center;
-    gap: 7rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 

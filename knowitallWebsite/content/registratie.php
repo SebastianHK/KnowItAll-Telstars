@@ -31,7 +31,11 @@
     </header>
 
     <main>
+        <div id="errorDiv" class="error success" >
+            <h3 id="errorText">
 
+            </h3>
+        </div>
         <form class="registratieContainer" method="post" action="registratie.php">
             <?php include('errors.php'); ?>
             <h1>Aanmelden</h1>

@@ -35,7 +35,7 @@ $weetjes = array();
 
 $vandaag = date("d-m-Y");
 
-$sqs = "SELECT * FROM weetjesDB WHERE geb_datum='$vandaag'";
+$sqs = "SELECT * FROM weetjesdb WHERE geb_datum='$vandaag'";
 
 
 $result = $conn->query($sqs);
@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 
 $vWeetjes = $weetjes[mt_rand(0, count($weetjes)-1)];
 
-print("<pre>".print_r($weetjes,true)."</pre>");
+
 session_start();
 // sessions voor de zoekbalk
 if (isset($_SESSION["pSorteer"])) {
