@@ -5,9 +5,8 @@ session_start();
 $gebruikersnaam = "";
 $email    = "";
 $errors = array();
-
+require 'connectie.php';
 // connect to the database
-$db = mysqli_connect('localhost', 'student4a0_558674', 'kryX8I', 'student4a0_558674');
 
 //$db = mysqli_connect('localhost', 'root', '', 'knowitall');
 
