@@ -199,7 +199,11 @@ if ($conn -> connect_errno) {
                 $gebruikersnaam = $row['gebruiker'];
                 $titel = $row['titel'];
                 array_push($weetjesArr,'weetje.'.$ID);
-
+                if ($row['geb_datum'] == "0000-00-00") {
+                    $geb_datum = "NVT";
+                } else {
+                    $geb_datum = date('d-m-Y',strtotime($row['geb_datum']));
+                }
                 $weetjesArr['weetje.'.$ID][] = $row['weetjes'];
 
                 echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">

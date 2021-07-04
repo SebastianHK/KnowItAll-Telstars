@@ -179,7 +179,7 @@ if ($conn -> connect_errno) {
         <p class="tooltip">Status
             <span class="tooltiptext">Satus van het weetje.</span>
         </p> -
-        <p class="tooltip">Verwijderrrr
+        <p class="tooltip">Verwijder
             <span class="tooltiptext">Verwijdert een weetje.</span>
         </p>
     </div>

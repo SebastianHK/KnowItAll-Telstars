@@ -1,14 +1,16 @@
 <?php
 session_start();
-require "classes/mail.php";
+require_once "classes/mail.php";
 // initializing variables
 $gebruikersnaam = "";
-$email    = "";
+$email = "";
 $errors = array();
 require 'connectie.php';
 require 'functies.php';
 // connect to the database
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 //$db = mysqli_connect('localhost', 'root', '', 'knowitall');
 
 // REGISTER USER
@@ -58,7 +60,7 @@ if (isset($_POST['reg_gebruiker'])) {
     $gebruiker = mysqli_fetch_assoc($result);
 
     if ($gebruiker) { // if user exists
-        if ($gebruiker['gebruikersnaam'] === $gebruikersnaam) {
+        if ($gebruiker['gebruiker'] === $gebruikersnaam) {
             array_push($errors, "Deze gebruikersnaam word al gebruikt");
         }
 
@@ -66,19 +68,16 @@ if (isset($_POST['reg_gebruiker'])) {
             array_push($errors, "Deze email word al gebruikt");
         }
     }
-    echo "test1";
+
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
-        echo "test1";
         $wachtwoord = password_hash($wachtwoord_1,PASSWORD_DEFAULT);//encrypt the password before saving in the database
-
         $query = "INSERT INTO gebruikers (gebruiker, email, wachtwoord) 
   			  VALUES('$gebruikersnaam', '$email', '$wachtwoord')";
         if (mysqli_query($db, $query)) {
             verifyEmail($gebruikersnaam, $email);
         } else {
-            echo '<script>errorr(true, "Er ging iets fout bij het maken van het account")</script>';
-
+            array_push($errors, "Er ging iets fout bij het maken van het account");
         }
 
 

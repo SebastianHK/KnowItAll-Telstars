@@ -231,6 +231,13 @@ $numRows = $numRows['COUNT(id)'];
 
         ?>
         </script>
+        <?php
+        if ($pGebruikersnaam != "") {
+            echo "<div id='persInfo'>Weetjes van <b>$pGebruikersnaam</b> <form class='invis' method='POST' action=''><input type='hidden' name='ID' value=''><input type='hidden' name='gebruikersnaam' value='$pGebruikersnaam'><input class='edit' name='editUser' value='' type='submit'></form></div>";
+        }
+        echo "<p>Resultaten: $numRows</p>";
+        ?>
+
         <div style="height: 100%;" class="weetjeDiv weetjeInfo">
             <p class="tooltip">ID
                 <span class="tooltiptext">ID van het weetje.</span>
@@ -258,11 +265,8 @@ $numRows = $numRows['COUNT(id)'];
 
 
         $sqs = $queryString;
-        //TODO gebruiker status toevoegen;
-        if ($pGebruikersnaam != "") {
-            echo "<div id='persInfo'>Weetjes van $pGebruikersnaam <form class='invis' onsubmit='return kill()' method='POST' action=''><input type='hidden' name='ID' value=''><input type='hidden' name='gebruikersnaam' value='$pGebruikersnaam'><input class='verwijder' name='ban' value='' type='submit'></form></div>";
-        }
-        echo "<p>Resultaten: $numRows</p>";
+
+
 
         //echo "<h1>".$sqs."</h1>";
 
@@ -372,17 +376,7 @@ $numRows = $numRows['COUNT(id)'];
             }
 
         }
-        if (isset($_POST["ban"]) && $_SESSION["rank"] == "admin") {
-            $persoonn = $_POST["gebruikersnaam"];
-            echo '<script>errorr(true, "Je wilde '.$persoonn.' bannen maar deze functie is nog niet gemaakt")</script>';
-            //TODO ban ding maken
-            /*$sql = "SELECT * FROM weetjesdb WHERE ID='$ID'";
-            if (mysqli_query($conn, $sql)) {
-                echo '<script>errorr(false, "Weetje '.$ID.' is succesvol verwijderd.")</script>';
-            } else {
-                echo '<script>errorr(true, "Er ging iets fout bij het verwijderen van weetje '.$ID.'.")</script>';
-            }*/
-        }
+
         ?>
         <?php endif ?>
 

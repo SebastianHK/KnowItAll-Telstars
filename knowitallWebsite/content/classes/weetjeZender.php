@@ -16,7 +16,7 @@ class zendWeetje {
         $this->gebruiker = $gebruiker;
         $this->ingDatum = $ingDatum;
         $this->image = $image;
-        require "mail.php";
+        require_once "mail.php";
         if ($ingDatum == '') {
             $ingDatum = '0000-00-00';
         }
@@ -39,7 +39,7 @@ class zendWeetje {
                 $mailStatus = "Er ging iets fout bij het sturen van een bevestigings email.";
             }
 
-            echo '<script>errorr(false, "Weetje is succesvol toegevoegd. '.$mailStatus.'")</script>';
+            echo '<script>errorr(false, "Weetje is succesvol toegevoegd.")</script>';
         } else {
             echo '<script>errorr(true, "Er ging iets fout bij het toevoegen van het weetje.")</script>';
         }

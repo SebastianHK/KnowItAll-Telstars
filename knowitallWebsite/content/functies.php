@@ -65,7 +65,7 @@ function edit($weetjesArr, $conn) {
     $ID = $_POST["ID"];
     $index = $_POST["index"];
     $editGebruikersnaam = $_POST["gebruikersnaam"];
-    if(strtolower($_SESSION["gebruikersnaam"]) == strtolower($editGebruikersnaam) && in_array('weetje.'.$ID, $weetjesArr) || $_SESSION["rank"] == 'admin') {
+    if($_SESSION["rank"] == 'admin') {
         $sqs = "SELECT * FROM `weetjesdb` WHERE ID=$ID";
         $result = $conn->query($sqs);
         if ($result->num_rows > 0) {
@@ -78,6 +78,7 @@ function edit($weetjesArr, $conn) {
                 $wPlaatje = $row['plaatje'];
                 $wStatus = $row['status'];
                 $comment =$row['comment'];
+                $wtitel =$row['titel'];
                 echo '
 <div id="editFormBackground">
     <form id="editForm" method="post">
@@ -99,6 +100,8 @@ function edit($weetjesArr, $conn) {
                 <option '. (($wStatus=='niet_reviewed')?'selected="selected"':"") .' value="niet_reviewed">niet_reviewed</option>
             </select>
         </div>
+        <label for="eTitel">Titel:</label>
+        <input name="eTitel" id="eTitel" type="text" value="'.$wtitel.'">
         <textarea name="eWeetje">'.$weetje.'</textarea>
         <textarea name="eComment" placeholder="bericht aan gebruiker...">'. $comment .'</textarea>
         <input class="submitKnop" type="reset" value="reset" >
@@ -112,27 +115,38 @@ function edit($weetjesArr, $conn) {
             echo '<script>errorr(true, "weetje niet gevonden")</script>';
         }
 
+    } else {
+        echo '<script>errorr(true, "je mag dit weetje niet aanpassen")</script>';
     }
 
-    print_r($weetjesArr["weetje.$ID"]);
 }
 
 function editKlaar($weetjesArr, $conn)
 {
+    if($_SESSION["rank"] != 'admin') {
+        echo '<script>errorr(true, "je mag dit weetje niet aanpassen")</script>';
+        return;
+    }
     $eID = $_POST["eID"];
-    $eGeb_datum = $_POST["eGeb_datum"];
+    if ($_POST["eGeb_datum"] == null) {
+        $eGeb_datum = "0000-00-00";
+    } else {
+        $eGeb_datum = $_POST["eGeb_datum"];
+    }
     $ePlaatje = $_POST["ePlaatje"];
     $eStatus = $_POST["eStatus"];
     $eWeetje = $_POST["eWeetje"];
     $eComment = $_POST["eComment"];
+    $eTitel = $_POST["eTitel"];
     $sql = "UPDATE weetjesdb SET 
                      geb_datum='$eGeb_datum', 
                      plaatje='$ePlaatje',
                      status='$eStatus',
                      weetjes='$eWeetje',
-                     comment='$eComment'
+                     comment='$eComment',
+                     titel='$eTitel'
                      WHERE id=$eID";
-
+    echo $sql;
     if (mysqli_query($conn, $sql)) {
         echo '<script>errorr(false, "weetje succesvol gewijzigd")</script>';
     } else {
@@ -373,11 +387,18 @@ function numRowsQuery() {
     return $numQueryString;
 }
 
-function verifyEmail($gebruiker, $email) {
-    global $errors;
-    if (isset($_SESSION["emailVerify"])) {
-        global $conn;
 
+
+function verifyEmail($gebruiker, $email) {
+    if (isset($_SESSION["emailVerify-$email"])) {
+        $evs = $_SESSION["emailVerify-$email"];
+    } else {
+        $_SESSION["emailVerify-$email"] = 0;
+        $evs = 0;
+    }
+    global $errors;
+    if ($evs != 2) {
+        global $conn;
         $hash = md5(rand(0,1000));
         $q = "UPDATE gebruikers SET hash='$hash' WHERE gebruiker='$gebruiker'";
 
@@ -397,15 +418,97 @@ function verifyEmail($gebruiker, $email) {
     
     ', 'KnowItAll<558674@edu.rocmn.nl>' ))
         {
-            $_SESSION["emailVerify"] = true;
+            $_SESSION["emailVerify-$email"]++;
             $_SESSION["success"] = "We hebben een verificatie email naar je gestuurd. Als je deze niet kan vinden zit hij waarschijnlijk in je spam folder.";
         } else {
             array_push($errors, "Er ging iets fout bij het sturen van de verificatie mail");
         }
     } else {
         array_push($errors, "Er is al een verificatie email naar je gestuurd.");
-
     }
 
+
+}
+
+if (isset($_POST["editUser"]) && $_SESSION["rank"] === "admin") {
+    $user = $_POST["gebruikersnaam"];
+
+    /*$numRowsQAf = "SELECT COUNT(*) FROM `weetjesdb` WHERE gebruiker='$user' AND status='afgekeurd'";
+    $numRowsQGo = "SELECT COUNT(*) FROM `weetjesdb` WHERE gebruiker='$user' AND status='goedgekeurd'";
+    $numRowsQNi = "SELECT COUNT(*) FROM `weetjesdb` WHERE gebruiker='$user' AND status='niet_reviewed'";
+    $numRowsQ = (int)$numRowsQNi+(int)$numRowsQGo+(int)$numRowsQAf;*/
+    $numRowsQ = "SELECT status FROM `weetjesdb` WHERE gebruiker='$user'";
+    $result = $conn->query($numRowsQ);
+
+    if ($result->num_rows > 0) {
+        $numRowsT = 0;
+        $numRowsAf = 0;
+        $numRowsGo = 0;
+        $numRowsNi = 0;
+        while($row = $result->fetch_assoc()) {
+            $numRowsT++;
+            if ($row["status"] == "goedgekeurd") {
+                $numRowsGo++;
+            }
+            if ($row["status"] == "afgekeurd") {
+                $numRowsAf++;
+            }
+            if ($row["status"] == "niet_reviewed") {
+                $numRowsNi++;
+            }
+        }
+    }
+
+    $sqs = "SELECT * FROM `gebruikers` WHERE gebruiker='$user'";
+    $results = mysqli_query($conn, $sqs);
+
+    if (mysqli_num_rows($results) == 1) {
+        $result = mysqli_fetch_assoc($results);
+        $uID = $result["id"];
+        $uEmail = $result["email"];
+        $uRank = $result["rank"];
+        $uVerified = $result["verified"];
+        if ($uVerified == 1) {
+            $uVerified = "ja";
+        } else {
+            $uVerified = "nee";
+        }
+        echo '
+<div id="editFormBackground">
+    <form id="editForm" method="post">
+        <div class="editFormTexts">
+            <h1>Informatie over '.$user.'</h1>
+            <hr>
+            <p>ID: '.$uID.'</p>
+            <p>Email: '.$uEmail.'</p>
+            <label for="uRank">Rank:</label>
+            <select style="width: 200px" name="uRank" id="uRank">
+                <option '. (($uRank=='admin')?'selected="selected"':"") .' value="admin">admin</option>
+                <option '. (($uRank=='gebruiker')?'selected="selected"':"") .' value="gebruiker">gebruiker</option>
+                <option style="color: red" '. (($uRank=='verbannen')?'selected="selected"':"") .' value="verbannen">verbannen</option>
+            </select>
+        </div>
+        <p>Geverifieerd: '.$uVerified.'</p>
+        <hr>
+        <p>Aantal weetjes: '.$numRowsT.'</p>
+        <p>goedgekeurde weetjes: '.$numRowsGo.'</p>
+        <p>niet reviewde weetjes: '.$numRowsNi.'</p>
+        <p>afgekeurde weetjes: '.$numRowsAf.'</p>
+        <a id="DelAllWB" style="width: 5rem; font-size: 0.7rem; height: 1rem; display: block;" class="submitKnop" onclick="kill(`DelAll`,`'.$user.'`)">Verwijder alles</a>
+        <input id="DelAllW" style="width: max-content; display: none;" class="submitKnop" type="submit" name="userDelAll" value="Confirm verwijder ALLE weetjes van '.$user.'">
+        <hr>
+        <input class="submitKnop" type="reset" value="reset" >
+        <input class="submitKnop" type="submit" value="cancel" name="editCancel">
+        <input class="submitKnop" type="submit" value="klaar" name="userEditKlaar">
+    </form>
+
+</div>
+                ';
+    } else {
+        array_push($errors, "Er is al iets fout gegaan bij het vinden van de gebruiker.");
+    }
+}
+
+if (isset($_POST["userEditKlaar"]) && $_SESSION["rank"] === "admin") {
 
 }

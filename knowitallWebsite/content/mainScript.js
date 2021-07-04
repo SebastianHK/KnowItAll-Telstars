@@ -106,10 +106,18 @@ function errorr(error, text) {
 }
 
 // Een feitje verwijderen
-function kill() {
+function kill(soort, id) {
+    console.log(soort);
+    if (soort == "DelAll") {
+        let verwijder=confirm("weet je zeker dat je ALLE weetjes van "+id+" wilt verwijderen? Dit kan niet ongedaan worden.");
+        if (verwijder == true) {
+            document.getElementById('DelAllW').style.display="block";
+            document.getElementById('DelAllWB').style.display="none";
 
-    let verwijder=confirm("weet je zeker dat je dit weetje wilt verwijderen?");
-
+        }
+    } else {
+        let verwijder=confirm("weet je zeker dat je deze rij wilt verwijderen? Dit kan niet ongedaan worden.");
+    }
     if (verwijder == true) {
         return true;
     } else {
