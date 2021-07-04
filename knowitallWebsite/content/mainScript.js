@@ -109,7 +109,7 @@ function errorr(error, text) {
 function kill(soort, id) {
     console.log(soort);
     if (soort == "DelAll") {
-        let verwijder=confirm("weet je zeker dat je ALLE weetjes van "+id+" wilt verwijderen? Dit kan niet ongedaan worden.");
+        let verwijder=confirm("weet je zeker dat je ALLE afgkeurde weetjes van "+id+" wilt verwijderen? Dit kan niet ongedaan worden.");
         if (verwijder == true) {
             document.getElementById('DelAllW').style.display="block";
             document.getElementById('DelAllWB').style.display="none";

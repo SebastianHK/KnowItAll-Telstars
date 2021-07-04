@@ -9,7 +9,16 @@ if (isset($_GET["pagina"])) {
     }
 }
 include "functies.php";
-$queryString = zoeken("admin");
+if (isset($_POST["zoekUser"]) || isset($_POST["zoek"])) {
+    delZSession();
+    selectQueryMaker("RESET",'');
+}
+if (isset($_POST["zoekUser"]) || isset($_SESSION["zoekUser"])) {
+    $queryString = zoekUser();
+} else {
+    $queryString = zoeken("admin");
+}
+
 // sessions voor de zoekbalk
 if (isset($_SESSION["pGebruikersnaam"])) {
     $pGebruikersnaam = $_SESSION["pGebruikersnaam"];
@@ -120,7 +129,7 @@ $numRows = $numRows['COUNT(id)'];
     <div id="styleSwitch">
         <p id="switchText"></p>
         <label id="styleSlider" class="switch">
-                <input id="sliderCheck">
+            <input id="sliderCheck">
             <span id="slider" class="slider norm round nintendo"></span>
         </label>
     </div>
@@ -216,20 +225,20 @@ $numRows = $numRows['COUNT(id)'];
             <input type="submit" value="Zoek" name="zoek" class="zoekInput">
         </form>
         <script>
-        <?php
-        if($pGebruikersnaam!=''){
-            echo 'document.getElementById("gebruikerDataList").value = "'.$pGebruikersnaam.'";';
-        }if($pSorteer!=''){
-            echo 'document.getElementById("sorteerInput").selectedIndex = document.getElementById("sorteerInput").options.namedItem("' . $pSorteer . '").index;';
-        } if($pAscDesc!=''){
-            echo 'document.getElementById("ascDescInput").selectedIndex = document.getElementById("ascDescInput").options.namedItem("' . $pAscDesc . '").index;';
-        } if($pFilter!=''){
-            echo 'document.getElementById("filterInput").selectedIndex = document.getElementById("filterInput").options.namedItem("' . $pFilter . '").index;';
-        } if ($pGeb_datum!=''){
-            echo 'document.getElementById("gebDatum").value="' . $pGeb_datum . '";';
-        }
+            <?php
+            if($pGebruikersnaam!=''){
+                echo 'document.getElementById("gebruikerDataList").value = "'.$pGebruikersnaam.'";';
+            }if($pSorteer!=''){
+                echo 'document.getElementById("sorteerInput").selectedIndex = document.getElementById("sorteerInput").options.namedItem("' . $pSorteer . '").index;';
+            } if($pAscDesc!=''){
+                echo 'document.getElementById("ascDescInput").selectedIndex = document.getElementById("ascDescInput").options.namedItem("' . $pAscDesc . '").index;';
+            } if($pFilter!=''){
+                echo 'document.getElementById("filterInput").selectedIndex = document.getElementById("filterInput").options.namedItem("' . $pFilter . '").index;';
+            } if ($pGeb_datum!=''){
+                echo 'document.getElementById("gebDatum").value="' . $pGeb_datum . '";';
+            }
 
-        ?>
+            ?>
         </script>
         <?php
         if ($pGebruikersnaam != "") {
@@ -291,7 +300,7 @@ $numRows = $numRows['COUNT(id)'];
 
                 echo '<div id=weetjeDiv'.$c.' class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$ID.'</p> - <p>'. $gebruikersnaam .'</p> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$geb_datum.'</p> - <p>'. $row['status']."</p>
+                        <p>'.$ID.'</p> - <form method="post" action=""><input type="submit" name="zoekUser" class="naamZoekKnop" value="'. $gebruikersnaam .'" ></form> - <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$geb_datum.'</p> - <p>'. $row['status']."</p>
                             <div id='editKnoppen'>
                                  <form class='invis editForm' method='POST' action=''>
                                        <input type='hidden' name='ID' value='$ID'>
@@ -323,33 +332,33 @@ $numRows = $numRows['COUNT(id)'];
             editKlaar($weetjesArr, $conn);
         }
 
-            $huidigPage1 = $huidigPage-1;
-            $huidigPage2 = $huidigPage+1;
-            echo "<div class='limitBar'>";
-            if ($huidigPage != 0) {
-                echo "<form method='get'>
+        $huidigPage1 = $huidigPage-1;
+        $huidigPage2 = $huidigPage+1;
+        echo "<div class='limitBar'>";
+        if ($huidigPage != 0) {
+            echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage1'>
                         <input class='limitKnop huidig' type='submit' value='❮'>
                       </form>";
-            }
+        }
 
-            for ($x = 0; $x <= $numRows/15; $x++) {
-                $s = $x+1;
+        for ($x = 0; $x <= $numRows/15; $x++) {
+            $s = $x+1;
 
-                if ($x == $huidigPage){$c = 'huidig';} else {$c='';}
-                echo "<form method='get'>
+            if ($x == $huidigPage){$c = 'huidig';} else {$c='';}
+            echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$x'>
                         <input class='limitKnop $c' type='submit' value='$s'>
                       </form>";
-            }
-            if ($huidigPage <=! $numRows/15 && $numRows/15 <=! 1) {
-                echo "<form method='get'>
+        }
+        if ($huidigPage <=! $numRows/15 && $numRows/15 <=! 1) {
+            echo "<form method='get'>
                         <input name='pagina' type='hidden' value='$huidigPage2'>
                         <input class='limitKnop huidig' type='submit' value='❯'>
                   </form>";
-            }
+        }
 
-            echo "</div>";
+        echo "</div>";
 
 
 

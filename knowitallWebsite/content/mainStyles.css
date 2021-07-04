@@ -463,6 +463,19 @@ main {
     width: 100%;
     word-wrap: break-word;
 }
+
+.naamZoekKnop {
+    color: #0645AD;
+    cursor: pointer;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.naamZoekKnop:visited {
+    color: #0B0080;
+}
+
 .verwijder {
     text-align: center;
     background-image: url("images/verwijder2.png");

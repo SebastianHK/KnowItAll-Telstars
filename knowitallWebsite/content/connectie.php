@@ -1,18 +1,18 @@
 <?php
-
+/*
 $localhost = "localhost"; #localhost
 $dbusername = ""; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
 $dbname = "";  #database name
+*/
 
-/*
 $localhost = "localhost"; #localhost
 $dbusername = "root"; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
 $dbname = "knowitall";  #database name
-*/
+
 // Vul hier je studenten nummer in:
-$sdn = "554619";
+$sdn = "";
 
 // Vul hier de email in waar naar de mails gestuurd moeten worden
 $aMail = "";

@@ -59,6 +59,7 @@ function delZSession() {
     unset($_SESSION["pSorteer"]);
     unset($_SESSION["pAscDesc"]);
     unset($_SESSION["pFilter"]);
+    unset($_SESSION["zoekUser"]);
 }
 
 function edit($weetjesArr, $conn) {
@@ -146,7 +147,6 @@ function editKlaar($weetjesArr, $conn)
                      comment='$eComment',
                      titel='$eTitel'
                      WHERE id=$eID";
-    echo $sql;
     if (mysqli_query($conn, $sql)) {
         echo '<script>errorr(false, "weetje succesvol gewijzigd")</script>';
     } else {
@@ -155,6 +155,22 @@ function editKlaar($weetjesArr, $conn)
 
 }
 
+function zoekUser() {
+    if (isset($_POST["zoekUser"])) {
+        $user = $_POST["zoekUser"];
+    } else {
+        $user = $_SESSION["pGebruikersnaam"];
+    }
+    delZSession();
+    selectQueryMaker("RESET",'');
+    selectQueryMaker("FROM",'weetjesdb');
+    selectQueryMaker("WHERE",'gebruiker='.$user);
+    $_SESSION["pGebruikersnaam"] = $user;
+    $_SESSION["zoekUser"] = true;
+    selectQueryMaker("LIMIT",'0,15');
+    $queryString = selectQueryMaker("DONE",'');
+    return $queryString;
+}
 
 function zoeken($currentPage)
 {
@@ -384,6 +400,7 @@ function numRowsQuery() {
             $c++;
         }
     }
+    //echo "<h1>$numQueryString</h1>";
     return $numQueryString;
 }
 
@@ -476,9 +493,10 @@ if (isset($_POST["editUser"]) && $_SESSION["rank"] === "admin") {
         }
         echo '
 <div id="editFormBackground">
-    <form id="editForm" method="post">
+    <form id="editForm" method="post" action="">
         <div class="editFormTexts">
             <h1>Informatie over '.$user.'</h1>
+            <input type="hidden" name="user" value="'.$user.'">
             <hr>
             <p>ID: '.$uID.'</p>
             <p>Email: '.$uEmail.'</p>
@@ -495,8 +513,8 @@ if (isset($_POST["editUser"]) && $_SESSION["rank"] === "admin") {
         <p>goedgekeurde weetjes: '.$numRowsGo.'</p>
         <p>niet reviewde weetjes: '.$numRowsNi.'</p>
         <p>afgekeurde weetjes: '.$numRowsAf.'</p>
-        <a id="DelAllWB" style="width: 5rem; font-size: 0.7rem; height: 1rem; display: block;" class="submitKnop" onclick="kill(`DelAll`,`'.$user.'`)">Verwijder alles</a>
-        <input id="DelAllW" style="width: max-content; display: none;" class="submitKnop" type="submit" name="userDelAll" value="Confirm verwijder ALLE weetjes van '.$user.'">
+        <a id="DelAllWB" style="width: max-content; font-size: 0.7rem; height: 1rem; display: block;" class="submitKnop" onclick="kill(`DelAll`,`'.$user.'`)">Verwijder afgekeurd</a>
+        <input id="DelAllW" style="width: max-content; display: none;" class="submitKnop" type="submit" name="userDelAll" value="Confirm verwijder afgekeurde weetjes van '.$user.'">
         <hr>
         <input class="submitKnop" type="reset" value="reset" >
         <input class="submitKnop" type="submit" value="cancel" name="editCancel">
@@ -511,5 +529,21 @@ if (isset($_POST["editUser"]) && $_SESSION["rank"] === "admin") {
 }
 
 if (isset($_POST["userEditKlaar"]) && $_SESSION["rank"] === "admin") {
+    $qer = "UPDATE gebruikers SET rank='".$_POST["uRank"]."' WHERE gebruiker='".$_POST["user"]."'";
 
+    if (mysqli_query($conn, $qer)) {
+        $_SESSION["success"] = "rank van ".$_POST["user"]." is succesvol aangepast.";
+    } else {
+        array_push($errors, "Er is al iets fout gegaan bij het aanpassen van de rank.");
+    }
+}
+
+if (isset($_POST["userDelAll"]) && $_SESSION["rank"] === "admin") {
+    $qer = "DELETE FROM weetjesdb WHERE gebruiker='".$_POST["user"]."' AND status='afgekeurd'";
+
+    if (mysqli_query($conn, $qer)) {
+        $_SESSION["success"] = "Alle weetjes van ".$_POST["user"]." zijn succesvol verwijderd.";
+    } else {
+        array_push($errors, "Er is al iets fout gegaan bij het verwijderen van de weetjes van ".$_POST["user"].".");
+    }
 }
