@@ -261,7 +261,6 @@ main {
     height: max-content;
     min-height: 13rem;
     max-height: 34rem;
-    position: relative;
     margin-bottom: 50px;
 }
 .grootBox p {
@@ -740,7 +739,6 @@ pre:before {
 
 
 .topnav {
-    overflow: hidden;
     background-color: #006FCD;
     position: absolute;
     top: 1000px;
@@ -810,7 +808,7 @@ pre:before {
         right: -28%;
     }
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1250px) {
     .headerNavKnop {
         opacity: 0;
         bottom: 0;

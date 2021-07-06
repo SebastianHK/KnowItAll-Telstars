@@ -126,6 +126,18 @@ $numRows = $numRows['COUNT(id)'];
         .topnav a.icon {
             background-color: #E70013;
         }
+        @media only screen and (max-width: 1000px) {
+            #zoekCentrum {
+                display: block;
+            }
+            #zoekCentrum input[type=submit], #zoekCentrum input[type=reset] {
+                width: 100%;
+            }
+            select {
+                text-align-last: center;
+            }
+        }
+
     </style>
 
 </head>
@@ -144,8 +156,8 @@ $numRows = $numRows['COUNT(id)'];
         <!-- Navigation links (hidden by default) -->
         <div id="myLinks">
             <a href="../index.php">KnowItAll</a>
-            <a href="content/weetjesCat.php">Weetjes catalogus</a>
-            <a href="content/index.php" >Profiel</a>
+            <a href="weetjesCat.php">Weetjes catalogus</a>
+            <a href="index.php" >Profiel</a>
             <a onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
             <a href="index.php?logout='1'">Uitloggen</a>
         </div>
