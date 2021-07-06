@@ -654,6 +654,7 @@ pre:before {
 }
 
 
+
 #zoekCentrum input[type=submit],#zoekCentrum input[type=reset]  {
     font-size: 0.8rem;
     background-color: #F0F0F0;
@@ -742,7 +743,7 @@ pre:before {
     overflow: hidden;
     background-color: #006FCD;
     position: absolute;
-    top: 0;
+    top: 1000px;
     right: 0;
     opacity: 0
 }
@@ -824,6 +825,7 @@ pre:before {
     }
     .topnav {
         opacity: 1;
+        top: 0px;
     }
 }
 
@@ -840,6 +842,18 @@ pre:before {
     }
     #labels label:nth-child(1) {
         right: 0%;
+    }
+    .weetjeDiv {
+        width: 90%;
+    }
+    #zoekCentrum {
+        display: block;
+    }
+    #zoekCentrum input[type=submit], #zoekCentrum input[type=reset] {
+        width: 100%;
+    }
+    select {
+        text-align-last: center;
     }
 }
 @media only screen and (max-width: 600px) {

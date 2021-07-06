@@ -235,7 +235,7 @@ if ($conn -> connect_errno) {
 
                 echo '<div id=weetjeDiv'.$i.' class="weetjeDiv">
                         <div class="weetjeInfo">
-                        <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p> - <p>'. $row['status']."</p>
+                        <p>'.$titel.'</p> - <p>'. $row['plaats_datum'] .'</p> - <p>'.$row['geb_datum'].'</p>  '."
                         </div>
                         <hr>
                         <p class='weetje'>". $row['weetjes']."</p>
