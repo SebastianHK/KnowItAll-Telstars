@@ -21,6 +21,7 @@ class zendWeetje {
             $ingDatum = '0000-00-00';
         }
         $sql = "INSERT INTO weetjesdb (titel, weetjes, gebruiker, geb_datum, plaatje) VALUES ('$titel','$inhoud','$gebruiker','$ingDatum','$image')";
+
         if (mysqli_query($conn, $sql)) {
             if (sendMail($aMail, 'Nieuw weetje toegevoegd', '
 <h1>Er is een nieuw weetje toegevoed.</h1>
