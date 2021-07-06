@@ -118,6 +118,16 @@ $numRows = $numRows['COUNT(id)'];
     <link rel="stylesheet" href="mainStyles.css">
     <link rel="icon" href="" type="image/icon type">
     <link rel="icon" href="images/alleen_doos_logo.png" type="image/icon type">
+
+    <style>
+        .topnav {
+            background-color: #E70013;
+        }
+        .topnav a.icon {
+            background-color: #E70013;
+        }
+    </style>
+
 </head>
 <div id="xboxAchtergrond" class="xboxStyle achtergrond" style="opacity: 0;"></div>
 <div id="nintendoAchtergrond" class="nStyle achtergrond" style="opacity: 0;"></div>
