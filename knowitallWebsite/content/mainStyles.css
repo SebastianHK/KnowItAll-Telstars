@@ -7,11 +7,14 @@ Dit zijn de styles voor alle paginas, dingen hier veranderen veranderd elke pagi
 
 * {
     font-size: max(20px, 1.5vw);
-    
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
+}
+
+html, body{
+    overflow-x: hidden;
 }
 
 body {
@@ -247,6 +250,7 @@ main {
 
 .grootBox {
     overflow: auto;
+    overflow-y: hidden;
     padding: 20px;
     color: #272727;
     /* position: relative; */
@@ -255,7 +259,6 @@ main {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.74);
     box-shadow: 3px 3px rgba(37, 37, 37, 0.493);
-
 }
 .grootBox:nth-child(2) {
     width: 25rem;
