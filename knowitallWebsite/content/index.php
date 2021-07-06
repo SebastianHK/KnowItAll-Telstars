@@ -56,7 +56,31 @@ if ($conn -> connect_errno) {
     <title>KnowItAll</title>
     <link rel="stylesheet" href="mainStyles.css">
     <link rel="icon" href="images/alleen_doos_logo.png" type="image/icon type">
-
+    <style>
+        #altBericht {
+            width: 74%;
+            display: none;
+        }
+        #BoxaltBericht {
+            width: 100%;
+        }
+        @media only screen and (max-width: 700px) {
+            #altMain {
+                display: none;
+            }
+            body {
+                height: 800px;
+            }
+            #altBericht {
+                display: block;
+                color: white;
+                position: fixed;
+                word-wrap: break-word;
+                top: 45%;
+                left: 13%;
+            }
+        }
+    </style>
 </head>
 <div id="xboxAchtergrond" class="xboxStyle achtergrond" style="opacity: 0;"></div>
 <div id="nintendoAchtergrond" class="nStyle achtergrond" style="opacity: 0;"></div>
@@ -351,6 +375,10 @@ if ($conn -> connect_errno) {
 */
 
 </script>
+
+<div id="BoxaltBericht">
+    <p id="altBericht">De Admin control pagina is alleen beschikbaar op<br>de desktop versie. Excuus voor het ongemak.</p>
+</div>
 
 </body>
 </html>

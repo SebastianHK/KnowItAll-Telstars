@@ -126,6 +126,13 @@ $numRows = $numRows['COUNT(id)'];
         .topnav a.icon {
             background-color: #E70013;
         }
+        #altBericht {
+            width: 74%;
+            display: none;
+        }
+        #BoxaltBericht {
+            width: 100%;
+        }
         @media only screen and (max-width: 1000px) {
             #zoekCentrum {
                 display: block;
@@ -135,6 +142,23 @@ $numRows = $numRows['COUNT(id)'];
             }
             select {
                 text-align-last: center;
+            }
+        }
+        @media only screen and (max-width: 700px) {
+            #altMain {
+                display: none;
+            }
+            body {
+                height: 800px;
+            }
+
+            #altBericht {
+                display: block;
+                color: white;
+                position: fixed;
+                word-wrap: break-word;
+                top: 45%;
+                left: 13%;
             }
         }
 
@@ -224,6 +248,10 @@ $numRows = $numRows['COUNT(id)'];
         <input class="submitKnop" type="submit" name="submit" value="VERSTUUR">
     </form>
     <div id="restContainer">
+
+    <div>
+        <p id="altBericht">De Admin control pagina is alleen beschikbaar op<br>de desktop versie. Excuus voor het ongemak.</p>
+    </div>
 
         <form id="zoekCentrum" action="" method="post">
             <label for="gebruiker">Gebruikersnaam</label>
@@ -451,6 +479,10 @@ $numRows = $numRows['COUNT(id)'];
     })
 
 </script>
+
+<div id="BoxaltBericht">
+    <p id="altBericht">De Admin control pagina is alleen beschikbaar op<br>de desktop versie. Excuus voor het ongemak.</p>
+</div>
 
 </body>
 </html>
