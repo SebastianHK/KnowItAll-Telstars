@@ -13,9 +13,6 @@ Dit zijn de styles voor alle paginas, dingen hier veranderen veranderd elke pagi
     text-decoration: none;
 }
 
-html, body{
-    overflow-x: hidden;
-}
 
 body {
     height: 100vh;
@@ -250,7 +247,6 @@ main {
 
 .grootBox {
     overflow: auto;
-    overflow-y: hidden;
     padding: 20px;
     color: #272727;
     /* position: relative; */
@@ -269,6 +265,7 @@ main {
     margin-bottom: 50px;
 }
 .grootBox p {
+    overflow-y: hidden;
     width: 100%;
     word-wrap: break-word;
 }
@@ -739,6 +736,56 @@ pre:before {
 
 }
 
+
+
+.topnav {
+    overflow: hidden;
+    background-color: #006FCD;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+    display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+    background-color: #006FCD;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+
+    background-color: #ddd;
+    color: #006FCD;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+    position: relative;
+    opacity: 0;
+    color: white;
+    background-color: black;
+}
+
+
 /* Voor PC */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
@@ -764,16 +811,19 @@ pre:before {
 }
 @media only screen and (max-width: 800px) {
     .headerNavKnop {
-        position: relative;
-        top: 60px;
-        left: -140%;
-        width: auto;
-        margin-left: 0rem;
+        opacity: 0;
+        bottom: 0;
+        position: absolute;
+        top: 1000px;
     }
     .logKnop {
-        position: relative;
-        top: 60px;
-        right: 25%;
+        opacity: 0;
+        bottom: 0;
+        position: absolute;
+        top: 1000px;
+    }
+    .topnav {
+        opacity: 1;
     }
 }
 
@@ -799,16 +849,14 @@ pre:before {
     .grootBox {
         width: 80%;
     }
-    .headerNavKnop {
-        top: 60px;
-        left: -190%;
-    }
-    .logKnop {
-        top: 60px;
-        right: 30%;
-    }
     #styleSwitch {
+        position: absolute;
         opacity: 0;
+        top: 1000px;
+    }
+    .titel {
+        position: absolute;
+        left: 10%   ;
     }
 }
 @media only screen and (max-width: 500px) {

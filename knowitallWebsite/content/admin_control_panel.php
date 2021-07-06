@@ -126,6 +126,24 @@ $numRows = $numRows['COUNT(id)'];
 <body>
 
 <header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Top Navigation Menu -->
+    <div class="topnav">
+        <a href="#home" class="active">ddd</a>
+        <!-- Navigation links (hidden by default) -->
+        <div id="myLinks">
+            <a href="../index.php">KnowItAll</a>
+            <a href="content/weetjesCat.php">Weetjes catalogus</a>
+            <a href="content/index.php" >Profiel</a>
+            <a href="index.php?logout='1'">Uitloggen</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
     <div id="styleSwitch">
         <p id="switchText"></p>
         <label id="styleSlider" class="switch">
