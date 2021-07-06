@@ -74,6 +74,7 @@ if ($conn -> connect_errno) {
         <div id="myLinks">
             <a href="../index.php">TheKnowItAll</a>
             <a href="weetjesCat.php">Weetjes catalogus</a>
+            <a onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
             <?php  if ($rank == 'admin') : ?>
                 <a href="admin_control_panel.php" id="adminCPK">Admin Control Panel</a>
             <?php endif ?>

@@ -876,6 +876,13 @@ pre:before {
         left: 10%   ;
     }
 }
+@media only screen and (max-width: 500px) {
+    #weetjeStuurder {
+        position: absolute;
+        right: 5%;
+        width: 80%;
+    }
+}
 @media only screen and (max-width: 400px) {
     #boxen {
         position: relative;

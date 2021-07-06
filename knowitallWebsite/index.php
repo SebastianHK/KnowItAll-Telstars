@@ -109,6 +109,7 @@ $conn->close();
                 <?php endif ?>
                 <?php  if ($gebruikersnaam !== 'gast') : ?>
                     <a href="content/index.php">Profiel</a>
+                    <a onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
                 <?php endif ?>
                 <?php  if ($rank == 'admin') : ?>
                     <a href="content/admin_control_panel.php">Admin Control Panel</a>

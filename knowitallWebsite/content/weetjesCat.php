@@ -79,6 +79,7 @@ if ($conn -> connect_errno) {
             <?php endif ?>
             <?php  if ($gebruikersnaam !== 'gast') : ?>
                 <a href="index.php" >Profiel</a>
+                <a onclick="document.getElementById('weetjeStuurder').style.display = 'block'">Weetje toevoegen</a>
             <?php endif ?>
             <?php  if ($rank == 'admin') : ?>
                 <a href="admin_control_panel.php" id="adminCPK">Admin Control Panel</a>
