@@ -855,6 +855,9 @@ pre:before {
     select {
         text-align-last: center;
     }
+    .registratieContainer {
+        width: 80%;
+    }
 }
 @media only screen and (max-width: 600px) {
     .grootBox:nth-child(2) {
@@ -873,22 +876,7 @@ pre:before {
         left: 10%   ;
     }
 }
-@media only screen and (max-width: 500px) {
-    .headerNavKnop {
-        left: -220%;
-    }
-    .logKnop {
-        right: 47%;
-    }
-}
 @media only screen and (max-width: 400px) {
-    .headerNavKnop {
-        right: 0px;
-    }
-    .logKnop {
-        top: 120px;
-        right: 95%;
-    }
     #boxen {
         position: relative;
         top: 60px;
@@ -901,21 +889,16 @@ pre:before {
         right: 0%;
         top: 60px;
     }
-}
-@media only screen and (max-width: 375px) {
-    .logKnop {
-        right: 105%;
+    .inputVeld input {
+        width: 15rem;
     }
 }
+
 @media only screen and (max-width: 350px) {
-    .logKnop {
-        right: 115%;
+    .inputVeld input {
+        width: 12rem;
     }
 }
-@media only screen and (max-width: 25px) {
-    .logKnop {
-        right: 125%;
-    }
-}
+
 
 

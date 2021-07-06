@@ -187,9 +187,6 @@ if ($conn -> connect_errno) {
             </p> -
             <p class="tooltip">Datum gebeurtenis
                 <span class="tooltiptext">De datum die de gebruiker heeft ingevoerd van wanneer het weetje gebeurt is.</span>
-            </p> -
-            <p class="tooltip">Status
-                <span class="tooltiptext">Satus van het weetje.</span>
             </p>
         </div>
         <?php
