@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+
+
 require_once "classes/mail.php";
 // initializing variables
 $gebruikersnaam = "";
@@ -70,10 +73,10 @@ if (isset($_POST['reg_gebruiker'])) {
     }
 
     // Finally, register user if there are no errors in the form
-    if (count($errors) == 0) {
+      if (count($errors) == 0) {
         $wachtwoord = password_hash($wachtwoord_1,PASSWORD_DEFAULT);//encrypt the password before saving in the database
         $query = "INSERT INTO gebruikers (gebruiker, email, wachtwoord) 
-  			  VALUES('$gebruikersnaam', '$email', '$wachtwoord')";
+                VALUES('$gebruikersnaam', '$email', '$wachtwoord')";
         if (mysqli_query($db, $query)) {
             verifyEmail($gebruikersnaam, $email);
         } else {

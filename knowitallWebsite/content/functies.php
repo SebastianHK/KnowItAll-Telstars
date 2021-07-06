@@ -429,7 +429,7 @@ function verifyEmail($gebruiker, $email) {
             <hr>
             <div>
                 <h2>Klik op de onderste link om je email te registreren.</h2>
-                <p>http://'.$sdn.'.student4a0.ao-ica.nl/knowitallWebsite/content/verify.php?email='.$email.'&hash='.$hash.'</p>
+                <p>http://'.$sdn.'.student4a0.ao-ica.nl/content/verify.php?email='.$email.'&hash='.$hash.'</p>
             
             </div>
 

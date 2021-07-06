@@ -121,11 +121,14 @@ $conn->close();
 
     <main>
         <div id="labels">
-            <label>Feitje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br><?php echo $vWeetjes["titel"] ?></label>
             <label>Informatie over de KnowItAll:</label>
+            <label>Feitje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br><?php echo $vWeetjes["titel"] ?></label>
         </div>
         <div id="boxen">
-            
+            <div class="grootBox">
+                <p>Welkom op de KnowItAll website. De KnowItAll is een online database volledig gefocussed op jawel, video games! Op deze website kan je je eigen leuke feitjes toevoegen, met afbeelding. </p>
+            </div>
+
             <div class="grootBox">
                 <?php
                 echo '<p>'. $vWeetjes["weetjes"] .'</p>';
@@ -133,9 +136,7 @@ $conn->close();
                 ?>
             </div>
             
-            <div class="grootBox">
-                <p>Welkom op de KnowItAll website. De KnowItAll is een online database volledig gefocussed op jawel, video games! Op deze website kan je je eigen leuke feitjes toevoegen, met afbeelding. </p>
-            </div>
+
         </div>
 
     </main>

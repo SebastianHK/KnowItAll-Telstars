@@ -257,7 +257,7 @@ main {
     box-shadow: 3px 3px rgba(37, 37, 37, 0.493);
 
 }
-.grootBox:nth-child(1) {
+.grootBox:nth-child(2) {
     width: 25rem;
     height: max-content;
     min-height: 13rem;
@@ -276,11 +276,12 @@ main {
     bottom: 5px;
    
 }
-#labels label:nth-child(1) {
-    right: 110px;
-}
 #labels label:nth-child(2) {
-    right: 25px;
+    bottom: 65px;
+    right: 0px;
+}
+#labels label:nth-child(1) {
+    right: 140px;
 }
 .grootBox p {
     line-height: 40px;
@@ -749,7 +750,29 @@ pre:before {
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-
+@media only screen and (max-width: 1100px) {
+    #labels label:nth-child(2) {
+        right: 250px;
+        top: 380px;
+    }
+    #labels label:nth-child(1) {
+        right: -28%;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .headerNavKnop {
+        position: relative;
+        top: 60px;
+        left: -140%;
+        width: auto;
+        margin-left: 0rem;
+    }
+    .logKnop {
+        position: relative;
+        top: 60px;
+        right: 25%;
+    }
+}
 
 @media only screen and (max-width: 768px) {
     /* Voor telefoons: */
@@ -757,4 +780,65 @@ pre:before {
       width: 100%;
     }
   }
+@media only screen and (max-width: 722px) {
+    #labels label:nth-child(2) {
+        right: 0%;
+        top: 150px;
+    }
+    #labels label:nth-child(1) {
+        right: 0%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .grootBox:nth-child(2) {
+        width: 80%;
+    }
+    .grootBox {
+        width: 80%;
+    }
+    .headerNavKnop {
+        top: 60px;
+        left: -190%;
+    }
+    .logKnop {
+        top: 60px;
+        right: 30%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .headerNavKnop {
+        left: -220%;
+    }
+    .logKnop {
+        right: 47%;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .headerNavKnop {
+        right: 0px;
+    }
+    .logKnop {
+        top: 120px;
+        right: 85%;
+    }
+    #boxen {
+        position: relative;
+        top: 60px;
+    }
+    #labels label:nth-child(2) {
+        right: 0%;
+        top: 210px;
+    }
+    #labels label:nth-child(1) {
+        right: 0%;
+        top: 60px;
+    }
+}
+/*@media only screen and (max-width: 400px) {*/
+/*    .logKnop {*/
+/*        right: 90%;*/
+/*    }*/
+/*}*/
+
+
 

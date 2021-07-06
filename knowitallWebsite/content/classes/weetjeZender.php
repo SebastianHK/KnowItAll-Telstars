@@ -31,7 +31,8 @@ class zendWeetje {
     <p>'.$inhoud.'</p>
 </div>
 <hr>
-<a href="http://'.$sdn.'.student4a0.ao-ica.nl/knowitallWebsite/content/admin_control_panel.php">Naar Admin Control Pagina</a>
+//<a href="http://'.$sdn.'.student4a0.ao-ica.nl/knowitallWebsite/content/admin_control_panel.php">Naar Admin Control Pagina</a>
+<a href="http://'.$sdn.'.student4a0.ao-ica.nl/content/admin_control_panel.php">Naar Admin Control Pagina</a>
     
     ', 'KnowItAll<558674@edu.rocmn.nl>' )) {
                 $mailStatus = "Er is een bevestigings email naar je gestuurd.";
