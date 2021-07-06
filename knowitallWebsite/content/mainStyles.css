@@ -270,6 +270,7 @@ main {
 .grootBox p {
     width: 100%;
     word-wrap: break-word;
+    overflow-y: hidden;
 }
 #labels label {
     position: relative;
