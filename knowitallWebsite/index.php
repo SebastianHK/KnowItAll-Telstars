@@ -108,14 +108,15 @@ $conn->close();
                     <a href="content/login.php">Login/Registreer</a>
                 <?php endif ?>
                 <?php  if ($gebruikersnaam !== 'gast') : ?>
-                    <a href="content/index.php" >Profiel</a>
+                    <a href="content/index.php">Profiel</a>
                 <?php endif ?>
                 <?php  if ($rank == 'admin') : ?>
-                    <a href="content/admin_control_panel.php" id="adminCPK">Admin Control Panel</a>
+                    <a href="content/admin_control_panel.php">Admin Control Panel</a>
                 <?php endif ?>
                 <?php  if ($gebruikersnaam !== 'gast') : ?>
                     <a href="content/index.php?logout='1'">Uitloggen</a>
                 <?php endif ?>
+
             </div>
             <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
