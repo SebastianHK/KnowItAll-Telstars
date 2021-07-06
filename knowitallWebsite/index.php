@@ -7,7 +7,7 @@
     <title>KnowItAll</title>
     <link rel="stylesheet" href="content/mainStyles.css">
     <link rel="icon" href="content/images/alleen_doos_logo.png" type="image/icon type">
-    
+
 </head>
     <div id="xboxAchtergrond" class="xboxStyle achtergrond" style="opacity: 0;"></div>
     <div id="nintendoAchtergrond" class="nStyle achtergrond" style="opacity: 0;"></div>
@@ -123,20 +123,18 @@ $conn->close();
         <div id="labels">
             <label>Informatie over de KnowItAll:</label>
             <label>Feitje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br><?php echo $vWeetjes["titel"] ?></label>
+
         </div>
         <div id="boxen">
             <div class="grootBox">
                 <p>Welkom op de KnowItAll website. De KnowItAll is een online database volledig gefocussed op jawel, video games! Op deze website kan je je eigen leuke feitjes toevoegen, met afbeelding. </p>
             </div>
-
             <div class="grootBox">
                 <?php
                 echo '<p>'. $vWeetjes["weetjes"] .'</p>';
                 echo ( $vWeetjes['plaatje'] != null ? "<img src='content/images/images_user/".$vWeetjes['plaatje']."'>" : "");
                 ?>
             </div>
-            
-
         </div>
 
     </main>

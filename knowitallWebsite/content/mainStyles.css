@@ -804,6 +804,9 @@ pre:before {
         top: 60px;
         right: 30%;
     }
+    #styleSwitch {
+        opacity: 0;
+    }
 }
 @media only screen and (max-width: 500px) {
     .headerNavKnop {
@@ -819,7 +822,7 @@ pre:before {
     }
     .logKnop {
         top: 120px;
-        right: 85%;
+        right: 95%;
     }
     #boxen {
         position: relative;
@@ -834,11 +837,20 @@ pre:before {
         top: 60px;
     }
 }
-/*@media only screen and (max-width: 400px) {*/
-/*    .logKnop {*/
-/*        right: 90%;*/
-/*    }*/
-/*}*/
-
+@media only screen and (max-width: 375px) {
+    .logKnop {
+        right: 105%;
+    }
+}
+@media only screen and (max-width: 350px) {
+    .logKnop {
+        right: 115%;
+    }
+}
+@media only screen and (max-width: 25px) {
+    .logKnop {
+        right: 125%;
+    }
+}
 
 
