@@ -250,6 +250,7 @@ main {
 
 .grootBox {
     overflow: auto;
+    overflow-y: hidden;
     padding: 20px;
     color: #272727;
     /* position: relative; */
@@ -270,7 +271,6 @@ main {
 .grootBox p {
     width: 100%;
     word-wrap: break-word;
-    overflow-y: hidden;
 }
 #labels label {
     position: relative;
