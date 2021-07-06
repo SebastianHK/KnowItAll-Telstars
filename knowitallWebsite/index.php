@@ -99,8 +99,8 @@ $conn->close();
             <label id="styleSlider" class="switch">
                 <input id="sliderCheck" type="checkbox" onclick="styleSlider()">
                 <span id="slider" class="slider norm round nintendo"></span>
-              </label>
-    </div>
+            </label>
+        </div>
     <a class="titel navKnop" href="index.php">TheKnowItAll</a>
     <div class="navKnoppen">
         <a href="content/weetjesCat.php" class="navKnop headerNavKnop">Weetjes catalogus</a>
