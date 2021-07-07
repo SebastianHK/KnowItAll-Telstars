@@ -377,7 +377,7 @@ if ($conn -> connect_errno) {
 </script>
 
 <div id="BoxaltBericht">
-    <p id="altBericht">De Admin control pagina is alleen beschikbaar op<br>de desktop versie. Excuus voor het ongemak.</p>
+    <p id="altBericht">De Profiel pagina is alleen beschikbaar op de desktop versie. Excuus voor het ongemak.</p>
 </div>
 
 </body>
