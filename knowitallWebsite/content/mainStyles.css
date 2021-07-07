@@ -455,6 +455,7 @@ main {
     width: 70%;
 }
 .weetjeInfo {
+    overflow: unset !important;
     display: flex;
     min-height: 0;
     justify-content: space-between;

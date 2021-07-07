@@ -33,30 +33,32 @@ setlocale(LC_TIME, array('nl_NL.UTF-8','nl_NL@euro','nl_NL','dutch'));
 
 $weetjes = array();
 
-$vandaag = date("d-m-Y");
+$vandaag = date("m-d");
+$weetjes = zoekWeetjesOfzo($vandaag);
 
-$sqs = "SELECT * FROM weetjesdb WHERE geb_datum='$vandaag'";
+function zoekWeetjesOfzo($dag) {
+    global $conn;
+    $sqs = "SELECT * FROM weetjesdb WHERE geb_datum LIKE '%$dag' AND status='goedgekeurd'";
+    $result = $conn->query($sqs);
+    $i = 0;
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
 
-
-$result = $conn->query($sqs);
-$i = 0;
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        if ($row['status'] == 'goedgekeurd') {
             $weetjes[$i]["gebruiker"] = $row["gebruiker"];
             $weetjes[$i]["titel"] = $row["titel"];
             $weetjes[$i]["weetjes"] = $row["weetjes"];
             $weetjes[$i]["plaatje"] = $row["plaatje"];
             $i++;
         }
-
-
+        return $weetjes;
+    } else {
+        return zoekWeetjesOfzo('0000-00-00');
     }
-} else {
-    echo "0 results";
 }
 
+
 $vWeetjes = $weetjes[mt_rand(0, count($weetjes)-1)];
+
 
 
 session_start();
@@ -94,8 +96,6 @@ if (count($weetjes) == 0) {
 $conn->close();
 ?>
     <header>
-
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Top Navigation Menu -->
@@ -124,11 +124,6 @@ $conn->close();
                 <i class="fa fa-bars"></i>
             </a>
         </div>
-
-
-
-
-
         <div id="styleSwitch">
             <p id="switchText"></p>
             <label id="styleSlider" class="switch">
@@ -157,8 +152,7 @@ $conn->close();
     <main>
         <div id="labels">
             <label>Informatie over de KnowItAll:</label>
-            <label>Feitje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br><?php echo $vWeetjes["titel"] ?></label>
-
+            <label>Weetje van <?php echo strftime("%A %d %B") ?><br>Gemaakt door <?php echo $vWeetjes["gebruiker"] ?><br></label>
         </div>
         <div id="boxen">
             <div class="grootBox">
@@ -166,6 +160,7 @@ $conn->close();
             </div>
             <div class="grootBox">
                 <?php
+                echo '<h2 style="font-weight:400;">'.$vWeetjes["titel"].'</h2>';
                 echo '<p>'. $vWeetjes["weetjes"] .'</p>';
                 echo ( $vWeetjes['plaatje'] != null ? "<img src='content/images/images_user/".$vWeetjes['plaatje']."'>" : "");
                 ?>
