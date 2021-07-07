@@ -834,6 +834,12 @@ pre:before {
       width: 100%;
     }
   }
+@media only screen and (max-width: 1600px) {
+    .weetjeDiv {
+        width: 80%;
+    }
+}
+
 @media only screen and (max-width: 722px) {
     #labels label:nth-child(2) {
         right: 0%;
